@@ -1,75 +1,76 @@
 ---
 import GalleryGrid from '../components/GalleryGrid.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
 import Layout from '../layouts/Layout.astro';
 import { getAllArtworks, getFeaturedArtworks } from '../lib/artworks';
 
 const allArtworks = getAllArtworks();
-const featured = getFeaturedArtworks(6);
-const showcase = featured.length > 0 ? featured : allArtworks.slice(0, 6);
-const leadArtwork = showcase[0];
+const featured = getFeaturedArtworks(8);
+const showcase = featured.length > 0 ? featured : allArtworks.slice(0, 8);
+const leadArtwork = showcase[0] ?? allArtworks[0];
 ---
 
-<Layout title="Jeff Conners | Contemporary Artwork" description="A minimalist gallery showcasing original artwork by Jeff Conners.">
-  <section class="hero">
-    <p class="section-label">Original Work</p>
-    <h1>
-      Color, contrast, and texture.
-      <span class="accent">Let the art breathe.</span>
-    </h1>
-    <p>
-      Jeff Conners explores bold visual structures through a colorblind-informed lens, with each piece
-      focused on shape, movement, and emotional tone.
-    </p>
-    <div>
-      <a class="cta" href="/gallery">Explore Gallery</a>
+<Layout
+  title="Jeff Conners | Contemporary Artwork"
+  description="A minimalist gallery showcasing original artwork by Jeff Conners."
+  snap={true}
+>
+  <section class="hero-center flow-section flow-section--first snap-section reveal">
+    <div class="hero-copy">
+      <p class="section-label">Original Work</p>
+      <h1>
+        A color study in motion.
+        <span class="accent">Built to be felt before explained.</span>
+      </h1>
+      <p class="hero-subline">
+        Jeff Conners explores contrast, rhythm, and texture through a colorblind-informed lens where each
+        composition pushes shape over convention.
+      </p>
     </div>
+    <HeroCarousel artworks={showcase} />
   </section>
 
   {
     leadArtwork ? (
-      <section class="panel hero-artwork" aria-label="Lead artwork">
+      <section class="hero-spotlight panel flow-section snap-section reveal" aria-label="Studio spotlight">
         <picture>
           <source srcset={leadArtwork.images.hero.webp} type="image/webp" />
-          <img
-            src={leadArtwork.images.hero.jpg}
-            alt={leadArtwork.alt}
-            width="2200"
-            height="2200"
-            loading="eager"
-            fetchpriority="high"
-          />
+          <img src={leadArtwork.images.hero.jpg} alt={leadArtwork.alt} width="2200" height="1400" loading="lazy" />
         </picture>
-        <div class="hero-artwork__meta">
-          <p class="section-label">Spotlight</p>
+        <div class="hero-spotlight__meta">
+          <p class="section-label">Studio Spotlight</p>
           <h2>{leadArtwork.title}</h2>
           <p>{leadArtwork.description}</p>
-          <p>{leadArtwork.medium} · {leadArtwork.dimensions} · {leadArtwork.year}</p>
+          <p>{leadArtwork.medium} / {leadArtwork.dimensions} / {leadArtwork.year}</p>
         </div>
       </section>
     ) : null
   }
 
-  <section class="two-col" aria-label="Artist summary">
+  <section class="two-col flow-section snap-section reveal" aria-label="Artist summary">
     <article class="panel">
       <p class="section-label">Artist Statement</p>
       <p>
-        This collection highlights high-resolution originals in a minimalist setting, so each painting can
+        This collection highlights high-resolution originals in a minimalist setting so each painting can
         hold attention without visual noise.
       </p>
     </article>
-    <article class="panel">
+    <a class="panel panel-link" href="/contact">
       <p class="section-label">Commissions</p>
       <p>
-        Select pieces are available for inquiry. Visit the contact page to request pricing, dimensions,
-        and studio availability.
+        Request availability, dimensions, and pricing. Start a direct inquiry and receive a response from
+        the studio.
       </p>
-    </article>
+      <span class="cta" style="display:inline-flex;margin-top:1rem;">Contact The Studio</span>
+    </a>
   </section>
 
-  <GalleryGrid
-    artworks={showcase}
-    title="Featured Pieces"
-    description="Tap any artwork to view the full-size image in the lightbox."
-    showFilters={false}
-  />
+  <section class="flow-section flow-section--gallery snap-section reveal" aria-label="Featured gallery">
+    <GalleryGrid
+      artworks={showcase}
+      title="Featured Gallery"
+      description="Curated work arranged with breathing room, tonal contrast, and detail-forward presentation."
+      showFilters={false}
+    />
+  </section>
 </Layout>

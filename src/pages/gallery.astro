@@ -7,17 +7,16 @@ const artworks = getAllArtworks();
 ---
 
 <Layout title="Gallery | Jeff Conners" description="Browse Jeff Conners artwork by style and category.">
-  <section class="hero" style="min-height: 34vh;">
+  <section class="hero flow-section flow-section--first reveal">
     <p class="section-label">Gallery</p>
     <h1>
       A focused archive of
-      <span class="accent">recent and selected works.</span>
+      <span class="accent">selected and recent work.</span>
     </h1>
-    <p>
-      Filter by category, then open any piece in the lightbox for a full-size view.
-    </p>
+    <p>Filter by category, then open any piece in the lightbox for a full-size view.</p>
   </section>
 
-  <GalleryGrid artworks={artworks} title="All Published Work" showFilters={true} />
+  <section class="flow-section flow-section--gallery reveal" aria-label="All artwork">
+    <GalleryGrid artworks={artworks} title="All Published Work" showFilters={true} />
+  </section>
 </Layout>
-

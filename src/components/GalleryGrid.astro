@@ -10,9 +10,10 @@ interface Props {
 
 const { artworks, title = 'Selected Works', showFilters = true, description } = Astro.props;
 const categories = Array.from(new Set(artworks.flatMap((artwork) => artwork.categories))).sort();
+const layoutPattern = ['art-card art-card--feature', 'art-card', 'art-card art-card--tall', 'art-card art-card--wide', 'art-card', 'art-card art-card--tall'];
 ---
 
-<section data-gallery-root data-artworks={JSON.stringify(artworks)}>
+<section class="gallery-shell" data-gallery-root>
   <p class="section-label">Gallery</p>
   <h2>{title}</h2>
   {description ? <p>{description}</p> : null}
@@ -37,13 +38,18 @@ const categories = Array.from(new Set(artworks.flatMap((artwork) => artwork.cate
       artworks.length === 0 ? (
         <div class="empty-state">No artwork has been published yet.</div>
       ) : (
-        artworks.map((artwork) => (
-          <article class="art-card" data-card data-categories={artwork.categories.join(',')}>
+        artworks.map((artwork, index) => (
+          <article
+            class={layoutPattern[index % layoutPattern.length]}
+            data-card
+            data-categories={artwork.categories.join(',')}
+            style={`--stagger:${(index % 10) * 65}ms`}
+          >
             <button
               type="button"
               data-lightbox-open
               data-title={artwork.title}
-              data-meta={`${artwork.medium} Â· ${artwork.year}`}
+              data-meta={`${artwork.medium} / ${artwork.year}`}
               data-alt={artwork.alt}
               data-webp={artwork.images.full.webp}
               data-jpg={artwork.images.full.jpg}
@@ -55,13 +61,13 @@ const categories = Array.from(new Set(artworks.flatMap((artwork) => artwork.cate
                   alt={artwork.alt}
                   loading="lazy"
                   decoding="async"
-                  width="900"
-                  height="1125"
+                  width="1200"
+                  height="900"
                 />
               </picture>
               <div class="art-meta">
                 <h3>{artwork.title}</h3>
-                <p>{artwork.medium} Â· {artwork.year}</p>
+                <p>{artwork.medium} / {artwork.year}</p>
               </div>
             </button>
           </article>
@@ -72,38 +78,32 @@ const categories = Array.from(new Set(artworks.flatMap((artwork) => artwork.cate
 </section>
 
 <dialog class="lightbox" data-lightbox>
-  <div class="lightbox__header">
-    <div>
+  <button type="button" class="lightbox__close" data-lightbox-close>Close</button>
+  <figure class="lightbox__figure">
+    <picture>
+      <source data-lightbox-source type="image/webp" />
+      <img data-lightbox-image alt="" width="2000" height="1300" />
+    </picture>
+    <figcaption class="lightbox__caption">
       <strong data-lightbox-title></strong>
       <p data-lightbox-meta></p>
-    </div>
-    <button type="button" data-lightbox-close>Close</button>
-  </div>
-  <picture>
-    <source data-lightbox-source type="image/webp" />
-    <img data-lightbox-image alt="" width="1600" height="1200" />
-  </picture>
+    </figcaption>
+  </figure>
 </dialog>
 
 <script>
   const galleryRoot = document.querySelector('[data-gallery-root]');
 
-  if (galleryRoot) {
-    const filterButtons = galleryRoot.querySelectorAll('[data-filter]');
-    const cards = galleryRoot.querySelectorAll('[data-card]');
+  if (galleryRoot instanceof HTMLElement) {
+    const filterButtons = Array.from(galleryRoot.querySelectorAll('[data-filter]'));
+    const cards = Array.from(galleryRoot.querySelectorAll('[data-card]'));
 
     const lightboxElement = document.querySelector('[data-lightbox]');
     const lightboxDialog = lightboxElement instanceof HTMLDialogElement ? lightboxElement : null;
-    const lightboxTitleElement = lightboxDialog?.querySelector('[data-lightbox-title]');
-    const lightboxMetaElement = lightboxDialog?.querySelector('[data-lightbox-meta]');
-    const lightboxSourceElement = lightboxDialog?.querySelector('[data-lightbox-source]');
-    const lightboxImageElement = lightboxDialog?.querySelector('[data-lightbox-image]');
-
-    const lightboxTitle = lightboxTitleElement instanceof HTMLElement ? lightboxTitleElement : null;
-    const lightboxMeta = lightboxMetaElement instanceof HTMLElement ? lightboxMetaElement : null;
-    const lightboxSource =
-      lightboxSourceElement instanceof HTMLSourceElement ? lightboxSourceElement : null;
-    const lightboxImage = lightboxImageElement instanceof HTMLImageElement ? lightboxImageElement : null;
+    const lightboxTitle = lightboxDialog?.querySelector('[data-lightbox-title]');
+    const lightboxMeta = lightboxDialog?.querySelector('[data-lightbox-meta]');
+    const lightboxSource = lightboxDialog?.querySelector('[data-lightbox-source]');
+    const lightboxImage = lightboxDialog?.querySelector('[data-lightbox-image]');
 
     filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
@@ -124,7 +124,13 @@ const categories = Array.from(new Set(artworks.flatMap((artwork) => artwork.cate
 
     galleryRoot.querySelectorAll('[data-lightbox-open]').forEach((button) => {
       button.addEventListener('click', () => {
-        if (!lightboxDialog || !lightboxTitle || !lightboxMeta || !lightboxSource || !lightboxImage) {
+        if (
+          !(lightboxDialog instanceof HTMLDialogElement) ||
+          !(lightboxTitle instanceof HTMLElement) ||
+          !(lightboxMeta instanceof HTMLElement) ||
+          !(lightboxSource instanceof HTMLSourceElement) ||
+          !(lightboxImage instanceof HTMLImageElement)
+        ) {
           return;
         }
 
@@ -145,6 +151,12 @@ const categories = Array.from(new Set(artworks.flatMap((artwork) => artwork.cate
 
     lightboxDialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => {
       lightboxDialog.close();
+    });
+
+    lightboxDialog?.addEventListener('click', (event) => {
+      if (event.target === lightboxDialog) {
+        lightboxDialog.close();
+      }
     });
   }
 </script>

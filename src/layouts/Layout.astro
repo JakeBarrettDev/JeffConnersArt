@@ -4,11 +4,13 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  snap?: boolean;
 }
 
 const {
   title = 'Jeff Conners | Artwork',
-  description = 'A minimalist, art-first portfolio featuring original work by Jeff Conners.'
+  description = 'A minimalist, art-first portfolio featuring original work by Jeff Conners.',
+  snap = false
 } = Astro.props;
 ---
 
@@ -24,14 +26,14 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
   </head>
-  <body>
+  <body class:list={[snap && 'snap-enabled']}>
     <div class="page-shell">
-      <header class="site-header">
+      <header class="site-header" data-site-header>
         <a href="/" class="brand">Jeff Conners</a>
         <nav aria-label="Primary">
           <a href="/gallery">Gallery</a>
@@ -46,6 +48,17 @@ const {
         <p>Maroon Raccoon LLC x Jeff Conners</p>
       </footer>
     </div>
+
+    <script>
+      const header = document.querySelector('[data-site-header]');
+      if (header instanceof HTMLElement) {
+        const toggleScrolled = () => {
+          header.classList.toggle('is-scrolled', window.scrollY > 24);
+        };
+
+        toggleScrolled();
+        window.addEventListener('scroll', toggleScrolled, { passive: true });
+      }
+    </script>
   </body>
 </html>
-
