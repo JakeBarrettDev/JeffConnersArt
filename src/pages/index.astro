@@ -1,11 +1,75 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
 import Layout from '../layouts/Layout.astro';
+import { getAllArtworks, getFeaturedArtworks } from '../lib/artworks';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allArtworks = getAllArtworks();
+const featured = getFeaturedArtworks(6);
+const showcase = featured.length > 0 ? featured : allArtworks.slice(0, 6);
+const leadArtwork = showcase[0];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Jeff Conners | Contemporary Artwork" description="A minimalist gallery showcasing original artwork by Jeff Conners.">
+  <section class="hero">
+    <p class="section-label">Original Work</p>
+    <h1>
+      Color, contrast, and texture.
+      <span class="accent">Let the art breathe.</span>
+    </h1>
+    <p>
+      Jeff Conners explores bold visual structures through a colorblind-informed lens, with each piece
+      focused on shape, movement, and emotional tone.
+    </p>
+    <div>
+      <a class="cta" href="/gallery">Explore Gallery</a>
+    </div>
+  </section>
+
+  {
+    leadArtwork ? (
+      <section class="panel hero-artwork" aria-label="Lead artwork">
+        <picture>
+          <source srcset={leadArtwork.images.hero.webp} type="image/webp" />
+          <img
+            src={leadArtwork.images.hero.jpg}
+            alt={leadArtwork.alt}
+            width="2200"
+            height="2200"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </picture>
+        <div class="hero-artwork__meta">
+          <p class="section-label">Spotlight</p>
+          <h2>{leadArtwork.title}</h2>
+          <p>{leadArtwork.description}</p>
+          <p>{leadArtwork.medium} · {leadArtwork.dimensions} · {leadArtwork.year}</p>
+        </div>
+      </section>
+    ) : null
+  }
+
+  <section class="two-col" aria-label="Artist summary">
+    <article class="panel">
+      <p class="section-label">Artist Statement</p>
+      <p>
+        This collection highlights high-resolution originals in a minimalist setting, so each painting can
+        hold attention without visual noise.
+      </p>
+    </article>
+    <article class="panel">
+      <p class="section-label">Commissions</p>
+      <p>
+        Select pieces are available for inquiry. Visit the contact page to request pricing, dimensions,
+        and studio availability.
+      </p>
+    </article>
+  </section>
+
+  <GalleryGrid
+    artworks={showcase}
+    title="Featured Pieces"
+    description="Tap any artwork to view the full-size image in the lightbox."
+    showFilters={false}
+  />
 </Layout>

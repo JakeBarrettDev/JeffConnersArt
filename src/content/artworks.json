@@ -1,0 +1,37 @@
+[
+  {
+    "id": "demo-piece",
+    "title": "Demo Piece",
+    "slug": "demo-piece",
+    "year": 2026,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Describe this piece in one short paragraph.",
+    "alt": "Accessible description of the artwork.",
+    "featured": false,
+    "categories": [
+      "abstract"
+    ],
+    "dominantColor": "#38d6ff",
+    "width": 2400,
+    "height": 3000,
+    "images": {
+      "thumb": {
+        "webp": "/art/demo-piece/thumb.webp",
+        "jpg": "/art/demo-piece/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/demo-piece/medium.webp",
+        "jpg": "/art/demo-piece/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/demo-piece/hero.webp",
+        "jpg": "/art/demo-piece/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/demo-piece/full.webp",
+        "jpg": "/art/demo-piece/full.jpg"
+      }
+    }
+  }
+]

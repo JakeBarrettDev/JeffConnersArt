@@ -1,0 +1,150 @@
+---
+import type { Artwork } from '../types/artwork';
+
+interface Props {
+  artworks: Artwork[];
+  title?: string;
+  showFilters?: boolean;
+  description?: string;
+}
+
+const { artworks, title = 'Selected Works', showFilters = true, description } = Astro.props;
+const categories = Array.from(new Set(artworks.flatMap((artwork) => artwork.categories))).sort();
+---
+
+<section data-gallery-root data-artworks={JSON.stringify(artworks)}>
+  <p class="section-label">Gallery</p>
+  <h2>{title}</h2>
+  {description ? <p>{description}</p> : null}
+
+  {
+    showFilters && categories.length > 0 ? (
+      <div class="gallery-toolbar">
+        <div class="category-filter" role="toolbar" aria-label="Filter artworks by category">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          {categories.map((category) => (
+            <button type="button" data-filter={category} aria-pressed="false">
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+    ) : null
+  }
+
+  <div class="gallery-grid" data-gallery-grid>
+    {
+      artworks.length === 0 ? (
+        <div class="empty-state">No artwork has been published yet.</div>
+      ) : (
+        artworks.map((artwork) => (
+          <article class="art-card" data-card data-categories={artwork.categories.join(',')}>
+            <button
+              type="button"
+              data-lightbox-open
+              data-title={artwork.title}
+              data-meta={`${artwork.medium} Â· ${artwork.year}`}
+              data-alt={artwork.alt}
+              data-webp={artwork.images.full.webp}
+              data-jpg={artwork.images.full.jpg}
+            >
+              <picture>
+                <source srcset={artwork.images.medium.webp} type="image/webp" />
+                <img
+                  src={artwork.images.medium.jpg}
+                  alt={artwork.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width="900"
+                  height="1125"
+                />
+              </picture>
+              <div class="art-meta">
+                <h3>{artwork.title}</h3>
+                <p>{artwork.medium} Â· {artwork.year}</p>
+              </div>
+            </button>
+          </article>
+        ))
+      )
+    }
+  </div>
+</section>
+
+<dialog class="lightbox" data-lightbox>
+  <div class="lightbox__header">
+    <div>
+      <strong data-lightbox-title></strong>
+      <p data-lightbox-meta></p>
+    </div>
+    <button type="button" data-lightbox-close>Close</button>
+  </div>
+  <picture>
+    <source data-lightbox-source type="image/webp" />
+    <img data-lightbox-image alt="" width="1600" height="1200" />
+  </picture>
+</dialog>
+
+<script>
+  const galleryRoot = document.querySelector('[data-gallery-root]');
+
+  if (galleryRoot) {
+    const filterButtons = galleryRoot.querySelectorAll('[data-filter]');
+    const cards = galleryRoot.querySelectorAll('[data-card]');
+
+    const lightboxElement = document.querySelector('[data-lightbox]');
+    const lightboxDialog = lightboxElement instanceof HTMLDialogElement ? lightboxElement : null;
+    const lightboxTitleElement = lightboxDialog?.querySelector('[data-lightbox-title]');
+    const lightboxMetaElement = lightboxDialog?.querySelector('[data-lightbox-meta]');
+    const lightboxSourceElement = lightboxDialog?.querySelector('[data-lightbox-source]');
+    const lightboxImageElement = lightboxDialog?.querySelector('[data-lightbox-image]');
+
+    const lightboxTitle = lightboxTitleElement instanceof HTMLElement ? lightboxTitleElement : null;
+    const lightboxMeta = lightboxMetaElement instanceof HTMLElement ? lightboxMetaElement : null;
+    const lightboxSource =
+      lightboxSourceElement instanceof HTMLSourceElement ? lightboxSourceElement : null;
+    const lightboxImage = lightboxImageElement instanceof HTMLImageElement ? lightboxImageElement : null;
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.getAttribute('data-filter') ?? 'all';
+
+        filterButtons.forEach((candidate) => {
+          candidate.setAttribute('aria-pressed', String(candidate === button));
+        });
+
+        cards.forEach((card) => {
+          const rawCategories = card.getAttribute('data-categories') ?? '';
+          const categoryList = rawCategories.split(',').filter(Boolean);
+          const shouldShow = target === 'all' || categoryList.includes(target);
+          card.toggleAttribute('hidden', !shouldShow);
+        });
+      });
+    });
+
+    galleryRoot.querySelectorAll('[data-lightbox-open]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!lightboxDialog || !lightboxTitle || !lightboxMeta || !lightboxSource || !lightboxImage) {
+          return;
+        }
+
+        const title = button.getAttribute('data-title') ?? '';
+        const meta = button.getAttribute('data-meta') ?? '';
+        const webp = button.getAttribute('data-webp') ?? '';
+        const jpg = button.getAttribute('data-jpg') ?? '';
+        const alt = button.getAttribute('data-alt') ?? '';
+
+        lightboxTitle.textContent = title;
+        lightboxMeta.textContent = meta;
+        lightboxSource.setAttribute('srcset', webp);
+        lightboxImage.setAttribute('src', jpg);
+        lightboxImage.setAttribute('alt', alt);
+        lightboxDialog.showModal();
+      });
+    });
+
+    lightboxDialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => {
+      lightboxDialog.close();
+    });
+  }
+</script>
