@@ -1,247 +1,166 @@
 ---
 import type { Artwork } from '../types/artwork';
 
-interface TextureSlide {
-  title: string;
-  alt: string;
-  webp?: string;
-  jpg: string;
-}
-
-interface CarouselSlide {
-  id: string;
-  title: string;
-  alt: string;
-  jpg: string;
-  webp?: string;
-  subtitle?: string;
-  kind: 'art' | 'texture';
-}
-
 interface Props {
   artworks: Artwork[];
-  textureSlides?: TextureSlide[];
 }
 
-const { artworks, textureSlides = [] } = Astro.props;
+const { artworks } = Astro.props;
 
-const artSlides: CarouselSlide[] = artworks.map((artwork) => ({
+const slides = artworks.map((artwork, i) => ({
   id: artwork.id,
   title: artwork.title,
-  subtitle: `${artwork.medium} / ${artwork.year}`,
+  subtitle: `${artwork.medium}, ${artwork.year}`,
   alt: artwork.alt,
   webp: artwork.images.hero.webp,
   jpg: artwork.images.hero.jpg,
-  kind: 'art'
+  kb: (i % 5) + 1,
 }));
 
-const fallbackTextures: TextureSlide[] = [
-  { title: 'Studio Texture I', alt: 'Canvas texture in cyan and charcoal tones', jpg: '/textures/texture-1.svg' },
-  { title: 'Studio Texture II', alt: 'Abstract brush texture in cyan and orange', jpg: '/textures/texture-2.svg' },
-  { title: 'Studio Texture III', alt: 'Layered paper texture in warm contrast tones', jpg: '/textures/texture-3.svg' }
+const fallbackSlides = [
+  { id: 'tex-1', title: 'Studio Texture I', subtitle: '', alt: 'Canvas texture in cyan and charcoal tones', webp: '', jpg: '/textures/texture-1.svg', kb: 1 },
+  { id: 'tex-2', title: 'Studio Texture II', subtitle: '', alt: 'Abstract brush texture in cyan and orange', webp: '', jpg: '/textures/texture-2.svg', kb: 2 },
+  { id: 'tex-3', title: 'Studio Texture III', subtitle: '', alt: 'Layered paper texture in warm contrast tones', webp: '', jpg: '/textures/texture-3.svg', kb: 3 },
 ];
 
-const texturePool = textureSlides.length > 0 ? textureSlides : fallbackTextures;
-const fillerSlides: CarouselSlide[] = (artSlides.length >= 4
-  ? []
-  : texturePool.slice(0, Math.max(0, 4 - artSlides.length))
-).map((texture, index) => ({
-  id: `texture-${index + 1}`,
-  title: texture.title,
-  alt: texture.alt,
-  jpg: texture.jpg,
-  webp: texture.webp,
-  kind: 'texture'
-}));
-
-const slides: CarouselSlide[] = [...artSlides, ...fillerSlides];
-const featuredSlide: CarouselSlide = slides[0] ?? {
-  id: 'texture-fallback',
-  title: fallbackTextures[0].title,
-  alt: fallbackTextures[0].alt,
-  jpg: fallbackTextures[0].jpg,
-  kind: 'texture'
-};
+const finalSlides = slides.length > 0 ? slides : fallbackSlides;
 ---
 
-<section class="hero-carousel-block" data-carousel-root>
-  <div class="hero-carousel" data-carousel>
-    <div class="hero-carousel__viewport" data-carousel-track>
-      {
-        slides.map((slide, index) => (
-          <article class="hero-carousel__slide" data-slide data-index={index}>
-            <picture>
-              {slide.webp ? <source srcset={slide.webp} type="image/webp" /> : null}
-              <img
-                src={slide.jpg}
-                alt={slide.alt}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                fetchpriority={index === 0 ? 'high' : undefined}
-                width="2200"
-                height="1400"
-              />
-            </picture>
-            <div class="hero-carousel__caption">
-              <h2>{slide.title}</h2>
-              {slide.subtitle ? <p>{slide.subtitle}</p> : null}
-            </div>
-          </article>
-        ))
-      }
-    </div>
-    <div class="hero-carousel__controls" aria-label="Carousel controls">
-      <button class="hero-carousel__arrow" type="button" data-carousel-prev aria-label="Previous slide">
-        Previous
-      </button>
-      <div class="hero-carousel__dots" role="tablist" aria-label="Carousel slides">
-        {
-          slides.map((slide, index) => (
+<div class="hero-cinematic" data-hero-cinematic>
+  <div class="hero-cinematic__stage">
+    {finalSlides.map((slide, i) => (
+      <div
+        class:list={['hero-cinematic__slide', i === 0 && 'is-active']}
+        data-slide-index={i}
+        data-kb={slide.kb}
+      >
+        <picture>
+          {slide.webp ? <source srcset={slide.webp} type="image/webp" /> : null}
+          <img
+            src={slide.jpg}
+            alt={slide.alt}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : undefined}
+            draggable="false"
+          />
+        </picture>
+      </div>
+    ))}
+
+    <div class="hero-cinematic__vignette"></div>
+
+    <div class="hero-cinematic__overlay">
+      <div class="hero-cinematic__meta" data-hero-meta>
+        <p class="hero-cinematic__title" data-hero-title>{finalSlides[0]?.title ?? ''}</p>
+        <p class="hero-cinematic__subtitle" data-hero-subtitle>{finalSlides[0]?.subtitle ?? ''}</p>
+      </div>
+
+      {finalSlides.length > 1 && (
+        <div class="hero-cinematic__dots" role="tablist" aria-label="Artwork slides">
+          {finalSlides.map((slide, i) => (
             <button
               type="button"
               role="tab"
-              aria-selected={index === 0 ? 'true' : 'false'}
-              aria-label={`Go to ${slide.title}`}
-              data-carousel-dot
-              data-index={index}
-            />
-          ))
-        }
-      </div>
-      <button class="hero-carousel__arrow" type="button" data-carousel-next aria-label="Next slide">
-        Next
-      </button>
+              class:list={['hero-cinematic__dot', i === 0 && 'is-active']}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-label={`View ${slide.title}`}
+              data-dot-index={i}
+            >
+              <span class="hero-cinematic__dot-fill"></span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   </div>
-
-  <div class="hero-mobile" data-hero-mobile>
-    <article class="hero-mobile__featured">
-      <img src={featuredSlide.jpg} alt={featuredSlide.alt} loading="eager" width="1600" height="1100" />
-      <div class="hero-mobile__meta">
-        <h2>{featuredSlide.title}</h2>
-      </div>
-    </article>
-    <div class="hero-mobile__strip" aria-label="Swipe through selected artwork">
-      {
-        slides.map((slide, index) => (
-          <article class="hero-mobile__chip">
-            <img src={slide.jpg} alt={slide.alt} loading={index < 2 ? 'eager' : 'lazy'} width="600" height="420" />
-            <p>{slide.title}</p>
-          </article>
-        ))
-      }
-    </div>
-  </div>
-</section>
+</div>
 
 <script is:inline>
-  (() => {
-    const carouselRoot = document.querySelector('[data-carousel-root]');
+(() => {
+  const root = document.querySelector('[data-hero-cinematic]');
+  if (!(root instanceof HTMLElement)) return;
 
-    if (!(carouselRoot instanceof HTMLElement)) {
-      return;
-    }
+  const slides = Array.from(root.querySelectorAll('[data-slide-index]'));
+  const dots = Array.from(root.querySelectorAll('[data-dot-index]'));
+  const titleEl = root.querySelector('[data-hero-title]');
+  const subtitleEl = root.querySelector('[data-hero-subtitle]');
+  const metaEl = root.querySelector('[data-hero-meta]');
 
-    const track = carouselRoot.querySelector('[data-carousel-track]');
-    const prevButton = carouselRoot.querySelector('[data-carousel-prev]');
-    const nextButton = carouselRoot.querySelector('[data-carousel-next]');
-    const dots = Array.from(carouselRoot.querySelectorAll('[data-carousel-dot]'));
+  if (slides.length <= 1) return;
 
-    if (!(track instanceof HTMLElement) || dots.length === 0) {
-      return;
-    }
+  const titles = slides.map(s => s.getAttribute('data-title') || '');
+  const subtitles = slides.map(s => s.getAttribute('data-subtitle') || '');
 
-    let activeIndex = 0;
-    let autoplayEnabled = true;
-    let autoplayTimer = null;
+  let active = 0;
+  let paused = false;
+  const INTERVAL = 6500;
+  const FADE = 1400;
 
-    const slideCount = dots.length;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const desktopMode = window.matchMedia('(min-width: 721px)').matches;
+  // Store metadata from the Astro-rendered data attributes
+  const slideMeta = [];
+  const metaOverlay = root.querySelector('.hero-cinematic__overlay');
 
-    const markManualOverride = () => {
-      autoplayEnabled = false;
-      carouselRoot.setAttribute('data-autoplay', 'off');
-      if (autoplayTimer !== null) {
-        window.clearInterval(autoplayTimer);
-      }
-    };
+  // Read initial titles from the rendered slide elements - we'll pull from dots' aria-labels
+  dots.forEach((dot, i) => {
+    const label = dot.getAttribute('aria-label') || '';
+    const title = label.replace('View ', '');
+    slideMeta.push({ title });
+  });
 
-    const updateDots = () => {
-      dots.forEach((dot, index) => {
-        dot.setAttribute('aria-selected', String(index === activeIndex));
-      });
-    };
+  function goTo(index) {
+    if (index === active) return;
+    const prev = active;
+    active = index;
 
-    const goToIndex = (index, smooth = true) => {
-      const bounded = ((index % slideCount) + slideCount) % slideCount;
-      activeIndex = bounded;
-      const targetSlide = track.querySelector('[data-index="' + bounded + '"]');
-      if (targetSlide instanceof HTMLElement) {
-        track.scrollTo({
-          left: targetSlide.offsetLeft,
-          behavior: smooth && !reduceMotion ? 'smooth' : 'auto'
-        });
-      }
-      updateDots();
-    };
-
-    const syncOnScroll = () => {
-      const slideNodes = Array.from(track.querySelectorAll('[data-slide]'));
-      let nearestIndex = 0;
-      let nearestDistance = Number.POSITIVE_INFINITY;
-
-      slideNodes.forEach((slide, index) => {
-        if (!(slide instanceof HTMLElement)) {
-          return;
-        }
-        const distance = Math.abs(slide.offsetLeft - track.scrollLeft);
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nearestIndex = index;
-        }
-      });
-
-      if (nearestIndex !== activeIndex) {
-        activeIndex = nearestIndex;
-        updateDots();
-      }
-    };
-
-    prevButton?.addEventListener('click', () => {
-      markManualOverride();
-      goToIndex(activeIndex - 1);
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === active);
+      slide.classList.toggle('is-leaving', i === prev);
     });
 
-    nextButton?.addEventListener('click', () => {
-      markManualOverride();
-      goToIndex(activeIndex + 1);
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === active);
+      dot.setAttribute('aria-selected', String(i === active));
     });
 
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const raw = dot.getAttribute('data-index');
-        if (!raw) {
-          return;
-        }
-        markManualOverride();
-        goToIndex(Number(raw));
-      });
-    });
-
-    track.addEventListener('scroll', syncOnScroll, { passive: true });
-    track.addEventListener('pointerdown', markManualOverride, { passive: true });
-    track.addEventListener('touchstart', markManualOverride, { passive: true });
-    track.addEventListener('wheel', markManualOverride, { passive: true });
-
-    if (desktopMode && !reduceMotion && autoplayEnabled) {
-      autoplayTimer = window.setInterval(() => {
-        if (!autoplayEnabled) {
-          return;
-        }
-        goToIndex(activeIndex + 1);
-      }, 6200);
+    // Fade meta text
+    if (metaEl instanceof HTMLElement) {
+      metaEl.classList.add('is-transitioning');
+      setTimeout(() => {
+        if (titleEl) titleEl.textContent = slideMeta[active]?.title || '';
+        // Rebuild subtitle from slide data
+        metaEl.classList.remove('is-transitioning');
+      }, 400);
     }
 
-    goToIndex(0, false);
-  })();
+    // Clean up leaving class after fade
+    setTimeout(() => {
+      slides[prev]?.classList.remove('is-leaving');
+    }, FADE + 100);
+  }
+
+  function advance() {
+    if (paused) return;
+    goTo((active + 1) % slides.length);
+  }
+
+  let timer = setInterval(advance, INTERVAL);
+
+  // Pause on hover (desktop)
+  root.addEventListener('mouseenter', () => { paused = true; });
+  root.addEventListener('mouseleave', () => { paused = false; });
+
+  // Dot clicks
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      clearInterval(timer);
+      goTo(i);
+      timer = setInterval(advance, INTERVAL);
+    });
+  });
+
+  // Respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    clearInterval(timer);
+  }
+})();
 </script>

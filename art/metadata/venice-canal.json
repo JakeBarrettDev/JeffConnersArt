@@ -1,0 +1,15 @@
+{
+  "title": "Venice Canal",
+  "slug": "venice-canal",
+  "year": 2025,
+  "medium": "Oil on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "Gondolas rest in golden water as Venice dissolves into haze and light, domes and colonnades glowing at the vanishing point.",
+  "alt": "Oil painting of a Venice canal in golden haze with domed buildings and a lone gondola",
+  "featured": true,
+  "categories": [
+    "landscape"
+  ],
+  "dominantColor": "#c0a860",
+  "sourceImage": "main.jpg"
+}

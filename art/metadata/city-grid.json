@@ -1,0 +1,15 @@
+{
+  "title": "City Grid",
+  "slug": "city-grid",
+  "year": 2025,
+  "medium": "Watercolor and ink",
+  "dimensions": "24 x 36 in",
+  "description": "An aerial view of the city in rain and mist, the grid of streets catching light where water pools between buildings.",
+  "alt": "Atmospheric watercolor aerial view of a misty city grid with rain and reflected light",
+  "featured": false,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#606870",
+  "sourceImage": "main.jpg"
+}

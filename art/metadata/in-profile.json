@@ -1,0 +1,15 @@
+{
+  "title": "In Profile",
+  "slug": "in-profile",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "A woman in profile, hair swept back in bold gestural strokes of black and orange — paint applied with the same force as wind.",
+  "alt": "Expressive acrylic portrait of a woman in profile with windswept hair in bold orange and black strokes",
+  "featured": true,
+  "categories": [
+    "portrait"
+  ],
+  "dominantColor": "#c88030",
+  "sourceImage": "main.jpg"
+}

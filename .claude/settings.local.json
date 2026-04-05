@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\cjhoo\\\\Desktop\\\\Projects\\\\clients\\\\Jeff_Conners\" && npm run build 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\cjhoo\\\\Desktop\\\\Projects\\\\clients\\\\Jeff_Conners\" && npm run dev)",
+      "Bash(cd \"C:\\\\Users\\\\cjhoo\\\\Desktop\\\\Projects\\\\clients\\\\Jeff_Conners\" && node -e \"\nconst sharp = require\\('sharp'\\);\nconst fs = require\\('fs'\\);\nconst path = require\\('path'\\);\n\nconst srcDir = 'C:/Users/cjhoo/Desktop/Images/jeffConnersArtworks';\nconst outDir = 'C:/Users/cjhoo/Desktop/Images/jeffConnersArtworks/previews';\n\nfs.mkdirSync\\(outDir, { recursive: true }\\);\n\nconst files = fs.readdirSync\\(srcDir\\).filter\\(f => /\\\\.\\(heic|png|jpg|jpeg\\)$/i.test\\(f\\)\\);\n\nasync function convert\\(\\) {\n  for \\(const f of files\\) {\n    try {\n      await sharp\\(path.join\\(srcDir, f\\)\\)\n        .rotate\\(\\)\n        .resize\\(800, 800, { fit: 'inside', withoutEnlargement: true }\\)\n        .jpeg\\({ quality: 70 }\\)\n        .toFile\\(path.join\\(outDir, f.replace\\(/\\\\.\\\\w+$/, '.jpg'\\)\\)\\);\n      console.log\\('OK:', f\\);\n    } catch \\(e\\) {\n      console.log\\('FAIL:', f, e.message\\);\n    }\n  }\n}\nconvert\\(\\);\n\" 2>&1)",
+      "Bash(where magick:*)"
+    ]
+  }
+}

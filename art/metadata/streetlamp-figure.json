@@ -1,0 +1,15 @@
+{
+  "title": "Streetlamp Figure",
+  "slug": "streetlamp-figure",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "A solitary figure stands beneath a streetlamp in deep blues and blacks, the light above breaking into pale yellow against an urban skyline.",
+  "alt": "Silhouetted figure standing under a glowing streetlamp in a dark blue and black urban night scene",
+  "featured": true,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#1a3a8c",
+  "sourceImage": "main.jpg"
+}

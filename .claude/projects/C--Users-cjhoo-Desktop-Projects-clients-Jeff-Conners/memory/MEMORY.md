@@ -1,0 +1,3 @@
+- [user_profile.md](user_profile.md) — CJ's role, preferences, and relationship to the project
+- [project_context.md](project_context.md) — Jeff Conners portfolio goals, stack decisions, and roadmap
+- [feedback_accent_colors.md](feedback_accent_colors.md) — Jeff requested cyan/orange accents, do not replace

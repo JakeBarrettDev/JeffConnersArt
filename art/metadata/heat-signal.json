@@ -1,0 +1,15 @@
+{
+  "title": "Heat Signal",
+  "slug": "heat-signal",
+  "year": 2025,
+  "medium": "Mixed media on paper",
+  "dimensions": "24 x 36 in",
+  "description": "An intersection dissolves into red and orange heat, traffic lights and cars reduced to dark silhouettes against a burning sky.",
+  "alt": "Abstract urban intersection bathed in intense red and orange tones with silhouetted traffic light and car",
+  "featured": true,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#e03010",
+  "sourceImage": "main.jpg"
+}

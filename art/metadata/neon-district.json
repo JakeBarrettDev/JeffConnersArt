@@ -1,0 +1,15 @@
+{
+  "title": "Neon District",
+  "slug": "neon-district",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "Figures and vendors in a saturated blur of blue, magenta, and red — the city at its loudest, painted at its most electric.",
+  "alt": "Intensely saturated acrylic painting of a neon-lit urban street scene with vibrant blues, reds, and magentas",
+  "featured": true,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#c01848",
+  "sourceImage": "main.jpg"
+}

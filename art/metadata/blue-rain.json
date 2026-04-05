@@ -1,0 +1,15 @@
+{
+  "title": "Blue Rain",
+  "slug": "blue-rain",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "Orange and yellow umbrellas pop against a blue-drenched city intersection — figures, taxis, and rain all moving at once.",
+  "alt": "Acrylic painting of a rainy blue city street with bright orange umbrellas and yellow taxis",
+  "featured": true,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#3868b8",
+  "sourceImage": "main.jpg"
+}

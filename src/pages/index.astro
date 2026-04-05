@@ -7,69 +7,48 @@ import { getAllArtworks, getFeaturedArtworks } from '../lib/artworks';
 const allArtworks = getAllArtworks();
 const featured = getFeaturedArtworks(8);
 const showcase = featured.length > 0 ? featured : allArtworks.slice(0, 8);
-const leadArtwork = showcase[0] ?? allArtworks[0];
 ---
 
 <Layout
   title="Jeff Conners | Contemporary Artwork"
-  description="A minimalist gallery showcasing original artwork by Jeff Conners."
+  description="Original artwork by Jeff Conners — contrast, rhythm, and texture through a colorblind-informed lens."
   snap={true}
 >
-  <section class="hero-center flow-section flow-section--first snap-section reveal">
-    <div class="hero-copy">
-      <p class="section-label">Original Work</p>
+  <section class="hero-full snap-section">
+    <HeroCarousel artworks={showcase} />
+    <div class="hero-full__copy reveal">
       <h1>
-        A color study in motion.
-        <span class="accent">Built to be felt before explained.</span>
+        Shape before color.
+        <span class="accent">Feeling before explanation.</span>
       </h1>
-      <p class="hero-subline">
-        Jeff Conners explores contrast, rhythm, and texture through a colorblind-informed lens where each
-        composition pushes shape over convention.
+      <p>
+        Jeff Conners paints through a colorblind lens — contrast, rhythm, and texture
+        guide each composition where convention cannot.
       </p>
     </div>
-    <HeroCarousel artworks={showcase} />
   </section>
-
-  {
-    leadArtwork ? (
-      <section class="hero-spotlight panel flow-section snap-section reveal" aria-label="Studio spotlight">
-        <picture>
-          <source srcset={leadArtwork.images.hero.webp} type="image/webp" />
-          <img src={leadArtwork.images.hero.jpg} alt={leadArtwork.alt} width="2200" height="1400" loading="lazy" />
-        </picture>
-        <div class="hero-spotlight__meta">
-          <p class="section-label">Studio Spotlight</p>
-          <h2>{leadArtwork.title}</h2>
-          <p>{leadArtwork.description}</p>
-          <p>{leadArtwork.medium} / {leadArtwork.dimensions} / {leadArtwork.year}</p>
-        </div>
-      </section>
-    ) : null
-  }
 
   <section class="two-col flow-section snap-section reveal" aria-label="Artist summary">
     <article class="panel">
-      <p class="section-label">Artist Statement</p>
+      <p class="section-label">The Work</p>
       <p>
-        This collection highlights high-resolution originals in a minimalist setting so each painting can
-        hold attention without visual noise.
+        Each painting starts as a shape study — tonal sketches that find their way into
+        acrylic and mixed-media sessions. The finished pieces sit here without distraction.
       </p>
     </article>
     <a class="panel panel-link" href="/contact">
       <p class="section-label">Commissions</p>
       <p>
-        Request availability, dimensions, and pricing. Start a direct inquiry and receive a response from
-        the studio.
+        Interested in a piece or a custom work? Reach out directly for availability, sizing, and pricing.
       </p>
-      <span class="cta" style="display:inline-flex;margin-top:1rem;">Contact The Studio</span>
+      <span class="cta" style="display:inline-flex;margin-top:1rem;">Get In Touch</span>
     </a>
   </section>
 
   <section class="flow-section flow-section--gallery snap-section reveal" aria-label="Featured gallery">
     <GalleryGrid
       artworks={showcase}
-      title="Featured Gallery"
-      description="Curated work arranged with breathing room, tonal contrast, and detail-forward presentation."
+      title="Selected Work"
       showFilters={false}
     />
   </section>

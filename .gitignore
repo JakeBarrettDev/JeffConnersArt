@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # local maintainer notes
 INTERNAL_NOTES.md
+
+# local reference docs (not deployed or shared)
+docs/

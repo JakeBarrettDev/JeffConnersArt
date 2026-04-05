@@ -1,0 +1,15 @@
+{
+  "title": "Uptown Lights",
+  "slug": "uptown-lights",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "Taxis streak through Times Square under neon signs — the Uptown Cafe glowing as the city pulses in blue and red.",
+  "alt": "Vibrant acrylic night scene of Times Square with neon signs, yellow taxis, and blue-red city lights",
+  "featured": true,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#2020c0",
+  "sourceImage": "main.jpg"
+}

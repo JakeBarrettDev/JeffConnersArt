@@ -1,0 +1,15 @@
+{
+  "title": "The Blue Umbrella",
+  "slug": "the-blue-umbrella",
+  "year": 2025,
+  "medium": "Watercolor and ink",
+  "dimensions": "24 x 36 in",
+  "description": "A blue umbrella and a blue car emerge from grey rain — everything else surrendered to atmosphere.",
+  "alt": "Watercolor of a person with blue umbrella and blue car in a grey rainy cityscape",
+  "featured": false,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#2040c0",
+  "sourceImage": "main.jpg"
+}

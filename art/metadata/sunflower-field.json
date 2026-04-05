@@ -1,0 +1,15 @@
+{
+  "title": "Sunflower Field",
+  "slug": "sunflower-field",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "Massive sunflowers press toward a cobalt sky — the blooms so close they fill the frame, all heat and texture.",
+  "alt": "Vivid acrylic painting of large yellow and orange sunflowers against a bright blue sky",
+  "featured": true,
+  "categories": [
+    "landscape"
+  ],
+  "dominantColor": "#e0a020",
+  "sourceImage": "main.jpg"
+}

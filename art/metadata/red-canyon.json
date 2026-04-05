@@ -1,0 +1,15 @@
+{
+  "title": "Red Canyon",
+  "slug": "red-canyon",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "Towers of blue and black rise against a blazing red sky — the city as geological formation, carved in paint.",
+  "alt": "Bold acrylic of dark blue city buildings against an intense red sky with yellow window lights",
+  "featured": true,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#d82010",
+  "sourceImage": "main.jpg"
+}

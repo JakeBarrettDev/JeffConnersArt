@@ -1,0 +1,15 @@
+{
+  "title": "Lone Tree",
+  "slug": "lone-tree",
+  "year": 2025,
+  "medium": "Watercolor on paper",
+  "dimensions": "24 x 36 in",
+  "description": "A bare tree stands in autumn marsh, branches reaching into a grey sky as rust-colored grasses and a pale stream flow beneath.",
+  "alt": "Watercolor of a solitary bare tree in autumn marshland with rust grasses and pale stream",
+  "featured": false,
+  "categories": [
+    "landscape"
+  ],
+  "dominantColor": "#885040",
+  "sourceImage": "main.jpg"
+}

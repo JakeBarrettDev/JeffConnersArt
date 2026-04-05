@@ -1,0 +1,15 @@
+{
+  "title": "Autumn Falls",
+  "slug": "autumn-falls",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "A waterfall pours through autumn forest in electric blue, orange, and red — every surface thick with impasto texture.",
+  "alt": "Colorful acrylic landscape of a waterfall surrounded by vivid blue and orange autumn trees",
+  "featured": true,
+  "categories": [
+    "landscape"
+  ],
+  "dominantColor": "#2870c0",
+  "sourceImage": "main.jpg"
+}

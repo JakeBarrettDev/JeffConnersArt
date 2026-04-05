@@ -1,0 +1,15 @@
+{
+  "title": "Night Bridge",
+  "slug": "night-bridge",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "The Brooklyn Bridge at night, its cables and towers glowing in blue against the warm amber lights of the city beyond.",
+  "alt": "Acrylic painting of a bridge at night with blue structural elements and warm amber city lights in background",
+  "featured": false,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#1830a0",
+  "sourceImage": "main.jpg"
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Sepia Crossing",
+  "slug": "sepia-crossing",
+  "year": 2025,
+  "medium": "Watercolor and ink",
+  "dimensions": "24 x 36 in",
+  "description": "A figure walks beneath traffic lights and power lines in warm sepia wash — the city stripped to its bones in brown ink.",
+  "alt": "Sepia-toned watercolor of a lone figure walking under traffic lights and power lines on a city street",
+  "featured": false,
+  "categories": [
+    "urban"
+  ],
+  "dominantColor": "#a08050",
+  "sourceImage": "main.jpg"
+}

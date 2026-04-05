@@ -1,0 +1,16 @@
+{
+  "title": "The Restaurant",
+  "slug": "the-restaurant",
+  "year": 2025,
+  "medium": "Acrylic on canvas",
+  "dimensions": "24 x 36 in",
+  "description": "A waiter carries a bottle through a warm amber dining room — the architecture receding into arches and golden light.",
+  "alt": "Acrylic interior scene of a waiter in a warmly lit restaurant with arched columns and seated diners",
+  "featured": false,
+  "categories": [
+    "urban",
+    "portrait"
+  ],
+  "dominantColor": "#c07030",
+  "sourceImage": "main.jpg"
+}

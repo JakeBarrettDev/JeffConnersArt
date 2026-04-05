@@ -26,7 +26,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Outfit:wght@300;350;400;450;500&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
@@ -45,7 +45,19 @@ const {
         <slot />
       </main>
       <footer class="site-footer">
-        <p>Maroon Raccoon LLC x Jeff Conners</p>
+        <div class="footer-inner">
+          <nav class="footer-nav" aria-label="Footer">
+            <a href="/gallery">Gallery</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+          </nav>
+          <div class="footer-brand">
+            <a href="https://MaroonRaccoon.dev" class="footer-logo" target="_blank" rel="noopener" aria-label="Maroon Raccoon LLC">
+              <img src="/maroon-raccoon.svg" alt="Maroon Raccoon" width="28" height="28" />
+            </a>
+            <p>Maroon Raccoon LLC &times; Jeff Conners</p>
+          </div>
+        </div>
       </footer>
     </div>
 
