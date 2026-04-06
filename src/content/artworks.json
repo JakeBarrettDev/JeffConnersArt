@@ -1,36 +1,1298 @@
 [
   {
-    "id": "demo-piece",
-    "title": "Demo Piece",
-    "slug": "demo-piece",
-    "year": 2026,
+    "id": "autumn-falls",
+    "title": "Autumn Falls",
+    "slug": "autumn-falls",
+    "year": 2025,
     "medium": "Acrylic on canvas",
     "dimensions": "24 x 36 in",
-    "description": "Describe this piece in one short paragraph.",
-    "alt": "Accessible description of the artwork.",
-    "featured": false,
+    "description": "A waterfall pours through autumn forest in electric blue, orange, and red — every surface thick with impasto texture.",
+    "alt": "Colorful acrylic landscape of a waterfall surrounded by vivid blue and orange autumn trees",
+    "featured": true,
     "categories": [
-      "abstract"
+      "landscape"
     ],
-    "dominantColor": "#38d6ff",
-    "width": 2400,
-    "height": 3000,
+    "dominantColor": "#2870c0",
+    "width": 2671,
+    "height": 3515,
     "images": {
       "thumb": {
-        "webp": "/art/demo-piece/thumb.webp",
-        "jpg": "/art/demo-piece/thumb.jpg"
+        "webp": "/art/autumn-falls/thumb.webp",
+        "jpg": "/art/autumn-falls/thumb.jpg"
       },
       "medium": {
-        "webp": "/art/demo-piece/medium.webp",
-        "jpg": "/art/demo-piece/medium.jpg"
+        "webp": "/art/autumn-falls/medium.webp",
+        "jpg": "/art/autumn-falls/medium.jpg"
       },
       "hero": {
-        "webp": "/art/demo-piece/hero.webp",
-        "jpg": "/art/demo-piece/hero.jpg"
+        "webp": "/art/autumn-falls/hero.webp",
+        "jpg": "/art/autumn-falls/hero.jpg"
       },
       "full": {
-        "webp": "/art/demo-piece/full.webp",
-        "jpg": "/art/demo-piece/full.jpg"
+        "webp": "/art/autumn-falls/full.webp",
+        "jpg": "/art/autumn-falls/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "blossom-path",
+    "title": "Blossom Path",
+    "slug": "blossom-path",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "A black-and-white forest path punctuated by bursts of pink blossoms — a study in where the eye goes when color is scarce.",
+    "alt": "Monochromatic acrylic painting of a forest path with pink blossom accents on dark trees",
+    "featured": true,
+    "categories": [
+      "landscape"
+    ],
+    "dominantColor": "#808080",
+    "width": 2686,
+    "height": 2694,
+    "images": {
+      "thumb": {
+        "webp": "/art/blossom-path/thumb.webp",
+        "jpg": "/art/blossom-path/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/blossom-path/medium.webp",
+        "jpg": "/art/blossom-path/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/blossom-path/hero.webp",
+        "jpg": "/art/blossom-path/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/blossom-path/full.webp",
+        "jpg": "/art/blossom-path/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "blue-crowd",
+    "title": "Blue Crowd",
+    "slug": "blue-crowd",
+    "year": 2025,
+    "medium": "Watercolor on paper",
+    "dimensions": "24 x 36 in",
+    "description": "A procession of figures rendered entirely in shades of blue — individual forms dissolving into the collective.",
+    "alt": "Minimalist watercolor of a crowd of people silhouettes in various shades of blue on white",
+    "featured": true,
+    "categories": [
+      "portrait"
+    ],
+    "dominantColor": "#1848a0",
+    "width": 2867,
+    "height": 2703,
+    "images": {
+      "thumb": {
+        "webp": "/art/blue-crowd/thumb.webp",
+        "jpg": "/art/blue-crowd/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/blue-crowd/medium.webp",
+        "jpg": "/art/blue-crowd/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/blue-crowd/hero.webp",
+        "jpg": "/art/blue-crowd/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/blue-crowd/full.webp",
+        "jpg": "/art/blue-crowd/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "blue-rain",
+    "title": "Blue Rain",
+    "slug": "blue-rain",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Orange and yellow umbrellas pop against a blue-drenched city intersection — figures, taxis, and rain all moving at once.",
+    "alt": "Acrylic painting of a rainy blue city street with bright orange umbrellas and yellow taxis",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#3868b8",
+    "width": 2889,
+    "height": 2145,
+    "images": {
+      "thumb": {
+        "webp": "/art/blue-rain/thumb.webp",
+        "jpg": "/art/blue-rain/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/blue-rain/medium.webp",
+        "jpg": "/art/blue-rain/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/blue-rain/hero.webp",
+        "jpg": "/art/blue-rain/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/blue-rain/full.webp",
+        "jpg": "/art/blue-rain/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "city-overlook",
+    "title": "City Overlook",
+    "slug": "city-overlook",
+    "year": 2025,
+    "medium": "Oil on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "A rainy cityscape viewed from above — wet streets reflect signs and traffic as the skyline dissolves into mist and pink haze.",
+    "alt": "Oil painting of a rainy city intersection viewed from above with reflective wet streets and misty skyline",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#906888",
+    "width": 1732,
+    "height": 1928,
+    "images": {
+      "thumb": {
+        "webp": "/art/city-overlook/thumb.webp",
+        "jpg": "/art/city-overlook/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/city-overlook/medium.webp",
+        "jpg": "/art/city-overlook/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/city-overlook/hero.webp",
+        "jpg": "/art/city-overlook/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/city-overlook/full.webp",
+        "jpg": "/art/city-overlook/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "emerald-rain",
+    "title": "Emerald Rain",
+    "slug": "emerald-rain",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "A lone umbrella figure walks between parked cars in a downpour of electric green light — the city recast in a color it never asked for.",
+    "alt": "Acrylic painting of a figure with umbrella in an intensely green-lit rainy city street at night",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#20c040",
+    "width": 2157,
+    "height": 2924,
+    "images": {
+      "thumb": {
+        "webp": "/art/emerald-rain/thumb.webp",
+        "jpg": "/art/emerald-rain/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/emerald-rain/medium.webp",
+        "jpg": "/art/emerald-rain/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/emerald-rain/hero.webp",
+        "jpg": "/art/emerald-rain/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/emerald-rain/full.webp",
+        "jpg": "/art/emerald-rain/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "golden-silhouettes",
+    "title": "Golden Silhouettes",
+    "slug": "golden-silhouettes",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Two figures lean together against a golden sky — their forms pure silhouette, their closeness the only detail that matters.",
+    "alt": "Acrylic painting of two silhouetted figures leaning together against a warm golden and dark background",
+    "featured": true,
+    "categories": [
+      "portrait"
+    ],
+    "dominantColor": "#c0a020",
+    "width": 3343,
+    "height": 2500,
+    "images": {
+      "thumb": {
+        "webp": "/art/golden-silhouettes/thumb.webp",
+        "jpg": "/art/golden-silhouettes/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/golden-silhouettes/medium.webp",
+        "jpg": "/art/golden-silhouettes/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/golden-silhouettes/hero.webp",
+        "jpg": "/art/golden-silhouettes/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/golden-silhouettes/full.webp",
+        "jpg": "/art/golden-silhouettes/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "heat-signal",
+    "title": "Heat Signal",
+    "slug": "heat-signal",
+    "year": 2025,
+    "medium": "Mixed media on paper",
+    "dimensions": "24 x 36 in",
+    "description": "An intersection dissolves into red and orange heat, traffic lights and cars reduced to dark silhouettes against a burning sky.",
+    "alt": "Abstract urban intersection bathed in intense red and orange tones with silhouetted traffic light and car",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#e03010",
+    "width": 1592,
+    "height": 2098,
+    "images": {
+      "thumb": {
+        "webp": "/art/heat-signal/thumb.webp",
+        "jpg": "/art/heat-signal/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/heat-signal/medium.webp",
+        "jpg": "/art/heat-signal/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/heat-signal/hero.webp",
+        "jpg": "/art/heat-signal/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/heat-signal/full.webp",
+        "jpg": "/art/heat-signal/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "in-profile",
+    "title": "In Profile",
+    "slug": "in-profile",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "A woman in profile, hair swept back in bold gestural strokes of black and orange — paint applied with the same force as wind.",
+    "alt": "Expressive acrylic portrait of a woman in profile with windswept hair in bold orange and black strokes",
+    "featured": true,
+    "categories": [
+      "portrait"
+    ],
+    "dominantColor": "#c88030",
+    "width": 2274,
+    "height": 2904,
+    "images": {
+      "thumb": {
+        "webp": "/art/in-profile/thumb.webp",
+        "jpg": "/art/in-profile/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/in-profile/medium.webp",
+        "jpg": "/art/in-profile/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/in-profile/hero.webp",
+        "jpg": "/art/in-profile/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/in-profile/full.webp",
+        "jpg": "/art/in-profile/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "manhattanhenge",
+    "title": "Manhattanhenge",
+    "slug": "manhattanhenge",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "A figure with an umbrella crosses a rain-soaked canyon of buildings as golden light floods between the towers.",
+    "alt": "Acrylic painting of a lone umbrella figure crossing a city street with dramatic golden light between tall buildings",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#d0903a",
+    "width": 2574,
+    "height": 3457,
+    "images": {
+      "thumb": {
+        "webp": "/art/manhattanhenge/thumb.webp",
+        "jpg": "/art/manhattanhenge/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/manhattanhenge/medium.webp",
+        "jpg": "/art/manhattanhenge/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/manhattanhenge/hero.webp",
+        "jpg": "/art/manhattanhenge/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/manhattanhenge/full.webp",
+        "jpg": "/art/manhattanhenge/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "neon-district",
+    "title": "Neon District",
+    "slug": "neon-district",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Figures and vendors in a saturated blur of blue, magenta, and red — the city at its loudest, painted at its most electric.",
+    "alt": "Intensely saturated acrylic painting of a neon-lit urban street scene with vibrant blues, reds, and magentas",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#c01848",
+    "width": 1854,
+    "height": 1802,
+    "images": {
+      "thumb": {
+        "webp": "/art/neon-district/thumb.webp",
+        "jpg": "/art/neon-district/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/neon-district/medium.webp",
+        "jpg": "/art/neon-district/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/neon-district/hero.webp",
+        "jpg": "/art/neon-district/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/neon-district/full.webp",
+        "jpg": "/art/neon-district/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "night-walk",
+    "title": "Night Walk",
+    "slug": "night-walk",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Two figures walk together on a neon-lit night street, pools of green and orange light reflected in wet pavement around them.",
+    "alt": "Acrylic painting of two silhouetted figures walking on a neon-lit wet city street at night",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#306030",
+    "width": 4032,
+    "height": 3024,
+    "images": {
+      "thumb": {
+        "webp": "/art/night-walk/thumb.webp",
+        "jpg": "/art/night-walk/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/night-walk/medium.webp",
+        "jpg": "/art/night-walk/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/night-walk/hero.webp",
+        "jpg": "/art/night-walk/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/night-walk/full.webp",
+        "jpg": "/art/night-walk/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "rainy-afternoon",
+    "title": "Rainy Afternoon",
+    "slug": "rainy-afternoon",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Yellow cabs and colored umbrellas move through a blue rain — a busy intersection rendered with joyful urgency.",
+    "alt": "Acrylic painting of a rainy city afternoon with yellow taxis, colorful umbrellas, and neon storefronts",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#d89020",
+    "width": 2574,
+    "height": 3368,
+    "images": {
+      "thumb": {
+        "webp": "/art/rainy-afternoon/thumb.webp",
+        "jpg": "/art/rainy-afternoon/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/rainy-afternoon/medium.webp",
+        "jpg": "/art/rainy-afternoon/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/rainy-afternoon/hero.webp",
+        "jpg": "/art/rainy-afternoon/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/rainy-afternoon/full.webp",
+        "jpg": "/art/rainy-afternoon/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "red-canyon",
+    "title": "Red Canyon",
+    "slug": "red-canyon",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Towers of blue and black rise against a blazing red sky — the city as geological formation, carved in paint.",
+    "alt": "Bold acrylic of dark blue city buildings against an intense red sky with yellow window lights",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#d82010",
+    "width": 2776,
+    "height": 2808,
+    "images": {
+      "thumb": {
+        "webp": "/art/red-canyon/thumb.webp",
+        "jpg": "/art/red-canyon/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/red-canyon/medium.webp",
+        "jpg": "/art/red-canyon/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/red-canyon/hero.webp",
+        "jpg": "/art/red-canyon/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/red-canyon/full.webp",
+        "jpg": "/art/red-canyon/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "streetlamp-figure",
+    "title": "Streetlamp Figure",
+    "slug": "streetlamp-figure",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "A solitary figure stands beneath a streetlamp in deep blues and blacks, the light above breaking into pale yellow against an urban skyline.",
+    "alt": "Silhouetted figure standing under a glowing streetlamp in a dark blue and black urban night scene",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#1a3a8c",
+    "width": 2930,
+    "height": 3220,
+    "images": {
+      "thumb": {
+        "webp": "/art/streetlamp-figure/thumb.webp",
+        "jpg": "/art/streetlamp-figure/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/streetlamp-figure/medium.webp",
+        "jpg": "/art/streetlamp-figure/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/streetlamp-figure/hero.webp",
+        "jpg": "/art/streetlamp-figure/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/streetlamp-figure/full.webp",
+        "jpg": "/art/streetlamp-figure/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "sunflower-field",
+    "title": "Sunflower Field",
+    "slug": "sunflower-field",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Massive sunflowers press toward a cobalt sky — the blooms so close they fill the frame, all heat and texture.",
+    "alt": "Vivid acrylic painting of large yellow and orange sunflowers against a bright blue sky",
+    "featured": true,
+    "categories": [
+      "landscape"
+    ],
+    "dominantColor": "#e0a020",
+    "width": 2579,
+    "height": 3284,
+    "images": {
+      "thumb": {
+        "webp": "/art/sunflower-field/thumb.webp",
+        "jpg": "/art/sunflower-field/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/sunflower-field/medium.webp",
+        "jpg": "/art/sunflower-field/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/sunflower-field/hero.webp",
+        "jpg": "/art/sunflower-field/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/sunflower-field/full.webp",
+        "jpg": "/art/sunflower-field/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "uptown-lights",
+    "title": "Uptown Lights",
+    "slug": "uptown-lights",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Taxis streak through Times Square under neon signs — the Uptown Cafe glowing as the city pulses in blue and red.",
+    "alt": "Vibrant acrylic night scene of Times Square with neon signs, yellow taxis, and blue-red city lights",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#2020c0",
+    "width": 3540,
+    "height": 2288,
+    "images": {
+      "thumb": {
+        "webp": "/art/uptown-lights/thumb.webp",
+        "jpg": "/art/uptown-lights/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/uptown-lights/medium.webp",
+        "jpg": "/art/uptown-lights/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/uptown-lights/hero.webp",
+        "jpg": "/art/uptown-lights/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/uptown-lights/full.webp",
+        "jpg": "/art/uptown-lights/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "venice-canal",
+    "title": "Venice Canal",
+    "slug": "venice-canal",
+    "year": 2025,
+    "medium": "Oil on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Gondolas rest in golden water as Venice dissolves into haze and light, domes and colonnades glowing at the vanishing point.",
+    "alt": "Oil painting of a Venice canal in golden haze with domed buildings and a lone gondola",
+    "featured": true,
+    "categories": [
+      "landscape"
+    ],
+    "dominantColor": "#c0a860",
+    "width": 2454,
+    "height": 3172,
+    "images": {
+      "thumb": {
+        "webp": "/art/venice-canal/thumb.webp",
+        "jpg": "/art/venice-canal/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/venice-canal/medium.webp",
+        "jpg": "/art/venice-canal/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/venice-canal/hero.webp",
+        "jpg": "/art/venice-canal/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/venice-canal/full.webp",
+        "jpg": "/art/venice-canal/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "violet-hour",
+    "title": "Violet Hour",
+    "slug": "violet-hour",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Figures move through a city intersection lit in violet, orange, and blue — the city vibrating in color that only exists in the gap between day and night.",
+    "alt": "Vibrant acrylic painting of city figures in a purple and orange lit urban night scene with neon reflections",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#6030a0",
+    "width": 2472,
+    "height": 3365,
+    "images": {
+      "thumb": {
+        "webp": "/art/violet-hour/thumb.webp",
+        "jpg": "/art/violet-hour/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/violet-hour/medium.webp",
+        "jpg": "/art/violet-hour/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/violet-hour/hero.webp",
+        "jpg": "/art/violet-hour/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/violet-hour/full.webp",
+        "jpg": "/art/violet-hour/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "wildflower-hillside",
+    "title": "Wildflower Hillside",
+    "slug": "wildflower-hillside",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Red poppies and golden wildflowers lead the eye toward a hazy blue ridge — the landscape alive with layered texture.",
+    "alt": "Acrylic landscape of red poppies and wildflowers on a hillside with blue mountains in the background",
+    "featured": true,
+    "categories": [
+      "landscape"
+    ],
+    "dominantColor": "#c08820",
+    "width": 2908,
+    "height": 3728,
+    "images": {
+      "thumb": {
+        "webp": "/art/wildflower-hillside/thumb.webp",
+        "jpg": "/art/wildflower-hillside/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/wildflower-hillside/medium.webp",
+        "jpg": "/art/wildflower-hillside/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/wildflower-hillside/hero.webp",
+        "jpg": "/art/wildflower-hillside/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/wildflower-hillside/full.webp",
+        "jpg": "/art/wildflower-hillside/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "autumn-trail",
+    "title": "Autumn Trail",
+    "slug": "autumn-trail",
+    "year": 2025,
+    "medium": "Watercolor on paper",
+    "dimensions": "24 x 36 in",
+    "description": "A path curves into a wall of autumn foliage — copper, rust, and hints of cyan between the trees.",
+    "alt": "Watercolor landscape of a trail leading into autumn trees in warm rust and copper tones",
+    "featured": false,
+    "categories": [
+      "landscape"
+    ],
+    "dominantColor": "#a85830",
+    "width": 1527,
+    "height": 2038,
+    "images": {
+      "thumb": {
+        "webp": "/art/autumn-trail/thumb.webp",
+        "jpg": "/art/autumn-trail/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/autumn-trail/medium.webp",
+        "jpg": "/art/autumn-trail/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/autumn-trail/hero.webp",
+        "jpg": "/art/autumn-trail/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/autumn-trail/full.webp",
+        "jpg": "/art/autumn-trail/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "city-grid",
+    "title": "City Grid",
+    "slug": "city-grid",
+    "year": 2025,
+    "medium": "Watercolor and ink",
+    "dimensions": "24 x 36 in",
+    "description": "An aerial view of the city in rain and mist, the grid of streets catching light where water pools between buildings.",
+    "alt": "Atmospheric watercolor aerial view of a misty city grid with rain and reflected light",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#606870",
+    "width": 1123,
+    "height": 1680,
+    "images": {
+      "thumb": {
+        "webp": "/art/city-grid/thumb.webp",
+        "jpg": "/art/city-grid/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/city-grid/medium.webp",
+        "jpg": "/art/city-grid/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/city-grid/hero.webp",
+        "jpg": "/art/city-grid/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/city-grid/full.webp",
+        "jpg": "/art/city-grid/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "city-rain-crossing",
+    "title": "City Rain Crossing",
+    "slug": "city-rain-crossing",
+    "year": 2025,
+    "medium": "Watercolor on paper",
+    "dimensions": "24 x 36 in",
+    "description": "Silhouettes with umbrellas move through a rain-soaked intersection, buildings rising in warm amber and teal around them.",
+    "alt": "Watercolor of silhouetted figures with umbrellas crossing a rainy city street with teal and amber buildings",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#c08030",
+    "width": 1330,
+    "height": 2512,
+    "images": {
+      "thumb": {
+        "webp": "/art/city-rain-crossing/thumb.webp",
+        "jpg": "/art/city-rain-crossing/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/city-rain-crossing/medium.webp",
+        "jpg": "/art/city-rain-crossing/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/city-rain-crossing/hero.webp",
+        "jpg": "/art/city-rain-crossing/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/city-rain-crossing/full.webp",
+        "jpg": "/art/city-rain-crossing/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "equestrian-skyline",
+    "title": "Equestrian Skyline",
+    "slug": "equestrian-skyline",
+    "year": 2025,
+    "medium": "Watercolor on paper",
+    "dimensions": "24 x 36 in",
+    "description": "A statue on horseback presides over a hazy skyline under a wash of peach and coral sky.",
+    "alt": "Watercolor of equestrian statue silhouette against a peach and coral urban skyline at sunset",
+    "featured": false,
+    "categories": [
+      "urban",
+      "landscape"
+    ],
+    "dominantColor": "#d8906a",
+    "width": 1761,
+    "height": 1895,
+    "images": {
+      "thumb": {
+        "webp": "/art/equestrian-skyline/thumb.webp",
+        "jpg": "/art/equestrian-skyline/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/equestrian-skyline/medium.webp",
+        "jpg": "/art/equestrian-skyline/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/equestrian-skyline/hero.webp",
+        "jpg": "/art/equestrian-skyline/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/equestrian-skyline/full.webp",
+        "jpg": "/art/equestrian-skyline/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "lone-tree",
+    "title": "Lone Tree",
+    "slug": "lone-tree",
+    "year": 2025,
+    "medium": "Watercolor on paper",
+    "dimensions": "24 x 36 in",
+    "description": "A bare tree stands in autumn marsh, branches reaching into a grey sky as rust-colored grasses and a pale stream flow beneath.",
+    "alt": "Watercolor of a solitary bare tree in autumn marshland with rust grasses and pale stream",
+    "featured": false,
+    "categories": [
+      "landscape"
+    ],
+    "dominantColor": "#885040",
+    "width": 2462,
+    "height": 1673,
+    "images": {
+      "thumb": {
+        "webp": "/art/lone-tree/thumb.webp",
+        "jpg": "/art/lone-tree/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/lone-tree/medium.webp",
+        "jpg": "/art/lone-tree/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/lone-tree/hero.webp",
+        "jpg": "/art/lone-tree/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/lone-tree/full.webp",
+        "jpg": "/art/lone-tree/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "meadow-light",
+    "title": "Meadow Light",
+    "slug": "meadow-light",
+    "year": 2025,
+    "medium": "Pastel on paper",
+    "dimensions": "24 x 36 in",
+    "description": "Red wildflowers and golden grasses glow beneath mountain haze — a quiet moment between the urban storms.",
+    "alt": "Pastel landscape of red wildflowers and golden grass with hazy blue mountains and an orange tree",
+    "featured": false,
+    "categories": [
+      "landscape"
+    ],
+    "dominantColor": "#c0a020",
+    "width": 1125,
+    "height": 1512,
+    "images": {
+      "thumb": {
+        "webp": "/art/meadow-light/thumb.webp",
+        "jpg": "/art/meadow-light/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/meadow-light/medium.webp",
+        "jpg": "/art/meadow-light/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/meadow-light/hero.webp",
+        "jpg": "/art/meadow-light/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/meadow-light/full.webp",
+        "jpg": "/art/meadow-light/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "night-bridge",
+    "title": "Night Bridge",
+    "slug": "night-bridge",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "The Brooklyn Bridge at night, its cables and towers glowing in blue against the warm amber lights of the city beyond.",
+    "alt": "Acrylic painting of a bridge at night with blue structural elements and warm amber city lights in background",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#1830a0",
+    "width": 2967,
+    "height": 3007,
+    "images": {
+      "thumb": {
+        "webp": "/art/night-bridge/thumb.webp",
+        "jpg": "/art/night-bridge/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/night-bridge/medium.webp",
+        "jpg": "/art/night-bridge/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/night-bridge/hero.webp",
+        "jpg": "/art/night-bridge/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/night-bridge/full.webp",
+        "jpg": "/art/night-bridge/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "rainy-guggenheim",
+    "title": "Rainy Guggenheim",
+    "slug": "rainy-guggenheim",
+    "year": 2025,
+    "medium": "Watercolor and ink",
+    "dimensions": "24 x 36 in",
+    "description": "The Guggenheim emerges from rain and atmosphere, a blue umbrella the only saturated note in a field of grey wash.",
+    "alt": "Watercolor of the Guggenheim museum in rain with blue umbrella figure and grey atmospheric wash",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#4050a0",
+    "width": 2087,
+    "height": 2849,
+    "images": {
+      "thumb": {
+        "webp": "/art/rainy-guggenheim/thumb.webp",
+        "jpg": "/art/rainy-guggenheim/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/rainy-guggenheim/medium.webp",
+        "jpg": "/art/rainy-guggenheim/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/rainy-guggenheim/hero.webp",
+        "jpg": "/art/rainy-guggenheim/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/rainy-guggenheim/full.webp",
+        "jpg": "/art/rainy-guggenheim/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "red-skyline",
+    "title": "Red Skyline",
+    "slug": "red-skyline",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Blue towers against a red sky — the city simplified to its boldest possible contrast, all structure and fire.",
+    "alt": "Bold acrylic painting of blue skyscrapers against a vivid red sky",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#1838b0",
+    "width": 2344,
+    "height": 2294,
+    "images": {
+      "thumb": {
+        "webp": "/art/red-skyline/thumb.webp",
+        "jpg": "/art/red-skyline/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/red-skyline/medium.webp",
+        "jpg": "/art/red-skyline/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/red-skyline/hero.webp",
+        "jpg": "/art/red-skyline/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/red-skyline/full.webp",
+        "jpg": "/art/red-skyline/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "sepia-crossing",
+    "title": "Sepia Crossing",
+    "slug": "sepia-crossing",
+    "year": 2025,
+    "medium": "Watercolor and ink",
+    "dimensions": "24 x 36 in",
+    "description": "A figure walks beneath traffic lights and power lines in warm sepia wash — the city stripped to its bones in brown ink.",
+    "alt": "Sepia-toned watercolor of a lone figure walking under traffic lights and power lines on a city street",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#a08050",
+    "width": 3669,
+    "height": 2446,
+    "images": {
+      "thumb": {
+        "webp": "/art/sepia-crossing/thumb.webp",
+        "jpg": "/art/sepia-crossing/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/sepia-crossing/medium.webp",
+        "jpg": "/art/sepia-crossing/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/sepia-crossing/hero.webp",
+        "jpg": "/art/sepia-crossing/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/sepia-crossing/full.webp",
+        "jpg": "/art/sepia-crossing/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "snowfall-traffic",
+    "title": "Snowfall Traffic",
+    "slug": "snowfall-traffic",
+    "year": 2025,
+    "medium": "Watercolor and ink",
+    "dimensions": "24 x 36 in",
+    "description": "Snow dots fall through a cityscape of teal and purple — cars and buildings rendered in loose, atmospheric ink wash.",
+    "alt": "Atmospheric watercolor of city traffic in falling snow with teal and purple tones",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#604868",
+    "width": 1622,
+    "height": 1975,
+    "images": {
+      "thumb": {
+        "webp": "/art/snowfall-traffic/thumb.webp",
+        "jpg": "/art/snowfall-traffic/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/snowfall-traffic/medium.webp",
+        "jpg": "/art/snowfall-traffic/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/snowfall-traffic/hero.webp",
+        "jpg": "/art/snowfall-traffic/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/snowfall-traffic/full.webp",
+        "jpg": "/art/snowfall-traffic/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "the-blue-umbrella",
+    "title": "The Blue Umbrella",
+    "slug": "the-blue-umbrella",
+    "year": 2025,
+    "medium": "Watercolor and ink",
+    "dimensions": "24 x 36 in",
+    "description": "A blue umbrella and a blue car emerge from grey rain — everything else surrendered to atmosphere.",
+    "alt": "Watercolor of a person with blue umbrella and blue car in a grey rainy cityscape",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#2040c0",
+    "width": 1125,
+    "height": 1979,
+    "images": {
+      "thumb": {
+        "webp": "/art/the-blue-umbrella/thumb.webp",
+        "jpg": "/art/the-blue-umbrella/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/the-blue-umbrella/medium.webp",
+        "jpg": "/art/the-blue-umbrella/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/the-blue-umbrella/hero.webp",
+        "jpg": "/art/the-blue-umbrella/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/the-blue-umbrella/full.webp",
+        "jpg": "/art/the-blue-umbrella/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "the-restaurant",
+    "title": "The Restaurant",
+    "slug": "the-restaurant",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "A waiter carries a bottle through a warm amber dining room — the architecture receding into arches and golden light.",
+    "alt": "Acrylic interior scene of a waiter in a warmly lit restaurant with arched columns and seated diners",
+    "featured": false,
+    "categories": [
+      "urban",
+      "portrait"
+    ],
+    "dominantColor": "#c07030",
+    "width": 3437,
+    "height": 2583,
+    "images": {
+      "thumb": {
+        "webp": "/art/the-restaurant/thumb.webp",
+        "jpg": "/art/the-restaurant/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/the-restaurant/medium.webp",
+        "jpg": "/art/the-restaurant/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/the-restaurant/hero.webp",
+        "jpg": "/art/the-restaurant/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/the-restaurant/full.webp",
+        "jpg": "/art/the-restaurant/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "three-walking",
+    "title": "Three Walking",
+    "slug": "three-walking",
+    "year": 2025,
+    "medium": "Watercolor on paper",
+    "dimensions": "24 x 36 in",
+    "description": "Three figures seen from behind, walking together in loose watercolor — the shapes of connection drawn without detail.",
+    "alt": "Watercolor painting of three people walking away from viewer in muted earth tones",
+    "featured": false,
+    "categories": [
+      "portrait"
+    ],
+    "dominantColor": "#a89070",
+    "width": 2740,
+    "height": 3771,
+    "images": {
+      "thumb": {
+        "webp": "/art/three-walking/thumb.webp",
+        "jpg": "/art/three-walking/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/three-walking/medium.webp",
+        "jpg": "/art/three-walking/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/three-walking/hero.webp",
+        "jpg": "/art/three-walking/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/three-walking/full.webp",
+        "jpg": "/art/three-walking/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "traffic-silhouettes",
+    "title": "Traffic Silhouettes",
+    "slug": "traffic-silhouettes",
+    "year": 2025,
+    "medium": "Watercolor on paper",
+    "dimensions": "24 x 36 in",
+    "description": "Cars and buildings rendered as dark ink shapes against glowing light — the city reduced to what the eye remembers at speed.",
+    "alt": "Atmospheric watercolor of dark car and building silhouettes against a glowing backlit city street",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#b87840",
+    "width": 3024,
+    "height": 3356,
+    "images": {
+      "thumb": {
+        "webp": "/art/traffic-silhouettes/thumb.webp",
+        "jpg": "/art/traffic-silhouettes/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/traffic-silhouettes/medium.webp",
+        "jpg": "/art/traffic-silhouettes/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/traffic-silhouettes/hero.webp",
+        "jpg": "/art/traffic-silhouettes/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/traffic-silhouettes/full.webp",
+        "jpg": "/art/traffic-silhouettes/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "two-in-yellow",
+    "title": "Two in Yellow",
+    "slug": "two-in-yellow",
+    "year": 2025,
+    "medium": "Watercolor and ink",
+    "dimensions": "24 x 36 in",
+    "description": "Two figures in bright jackets — one yellow, one blue — walk side by side, rendered in quick gestural ink and wash.",
+    "alt": "Gestural watercolor sketch of two people in yellow and blue jackets",
+    "featured": false,
+    "categories": [
+      "portrait"
+    ],
+    "dominantColor": "#c8a030",
+    "width": 2904,
+    "height": 1751,
+    "images": {
+      "thumb": {
+        "webp": "/art/two-in-yellow/thumb.webp",
+        "jpg": "/art/two-in-yellow/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/two-in-yellow/medium.webp",
+        "jpg": "/art/two-in-yellow/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/two-in-yellow/hero.webp",
+        "jpg": "/art/two-in-yellow/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/two-in-yellow/full.webp",
+        "jpg": "/art/two-in-yellow/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "wet-night-crossing",
+    "title": "Wet Night Crossing",
+    "slug": "wet-night-crossing",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "Umbrella-carrying silhouettes cross in front of a yellow taxi as rain turns the city into streaks of orange, blue, and black.",
+    "alt": "Dramatic acrylic night scene of silhouettes with umbrellas near a taxi on rain-streaked dark city streets",
+    "featured": false,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#c07020",
+    "width": 2595,
+    "height": 3235,
+    "images": {
+      "thumb": {
+        "webp": "/art/wet-night-crossing/thumb.webp",
+        "jpg": "/art/wet-night-crossing/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/wet-night-crossing/medium.webp",
+        "jpg": "/art/wet-night-crossing/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/wet-night-crossing/hero.webp",
+        "jpg": "/art/wet-night-crossing/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/wet-night-crossing/full.webp",
+        "jpg": "/art/wet-night-crossing/full.jpg"
       }
     }
   }

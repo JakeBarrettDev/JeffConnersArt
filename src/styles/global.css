@@ -698,14 +698,16 @@ dialog.lightbox::backdrop {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  z-index: 10;
   border: 1px solid rgba(237, 232, 226, 0.15);
   border-radius: var(--radius);
   background: rgba(15, 13, 11, 0.6);
+  backdrop-filter: blur(4px);
   color: var(--text-dim);
   font: inherit;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  padding: 0.3rem 0.65rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.4rem 0.6rem;
   cursor: pointer;
   transition: color var(--transition-fast), border-color var(--transition-fast);
 }
@@ -713,6 +715,46 @@ dialog.lightbox::backdrop {
 .lightbox__close:hover {
   color: var(--text);
   border-color: var(--accent);
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  border: 1px solid rgba(237, 232, 226, 0.12);
+  border-radius: var(--radius);
+  background: rgba(15, 13, 11, 0.5);
+  backdrop-filter: blur(4px);
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 1.8rem;
+  line-height: 1;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.lightbox__nav:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(15, 13, 11, 0.75);
+}
+
+.lightbox__nav--prev {
+  left: 0.8rem;
+}
+
+.lightbox__nav--next {
+  right: 0.8rem;
+}
+
+.lightbox__counter {
+  margin: 0.25rem 0 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
 }
 
 .lightbox__figure {

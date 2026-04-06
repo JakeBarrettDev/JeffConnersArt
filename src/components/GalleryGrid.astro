@@ -78,7 +78,9 @@ const layoutPattern = ['art-card art-card--feature', 'art-card', 'art-card art-c
 </section>
 
 <dialog class="lightbox" data-lightbox>
-  <button type="button" class="lightbox__close" data-lightbox-close>Close</button>
+  <button type="button" class="lightbox__close" data-lightbox-close aria-label="Close">&#x2715;</button>
+  <button type="button" class="lightbox__nav lightbox__nav--prev" data-lightbox-prev aria-label="Previous artwork">&#x2039;</button>
+  <button type="button" class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="Next artwork">&#x203A;</button>
   <figure class="lightbox__figure">
     <picture>
       <source data-lightbox-source type="image/webp" />
@@ -87,6 +89,7 @@ const layoutPattern = ['art-card art-card--feature', 'art-card', 'art-card art-c
     <figcaption class="lightbox__caption">
       <strong data-lightbox-title></strong>
       <p data-lightbox-meta></p>
+      <p class="lightbox__counter" data-lightbox-counter></p>
     </figcaption>
   </figure>
 </dialog>
@@ -97,66 +100,104 @@ const layoutPattern = ['art-card art-card--feature', 'art-card', 'art-card art-c
   if (galleryRoot instanceof HTMLElement) {
     const filterButtons = Array.from(galleryRoot.querySelectorAll('[data-filter]'));
     const cards = Array.from(galleryRoot.querySelectorAll('[data-card]'));
+    const openers = Array.from(galleryRoot.querySelectorAll('[data-lightbox-open]'));
 
-    const lightboxElement = document.querySelector('[data-lightbox]');
-    const lightboxDialog = lightboxElement instanceof HTMLDialogElement ? lightboxElement : null;
-    const lightboxTitle = lightboxDialog?.querySelector('[data-lightbox-title]');
-    const lightboxMeta = lightboxDialog?.querySelector('[data-lightbox-meta]');
-    const lightboxSource = lightboxDialog?.querySelector('[data-lightbox-source]');
-    const lightboxImage = lightboxDialog?.querySelector('[data-lightbox-image]');
+    const lightboxDialog = document.querySelector('[data-lightbox]');
+    if (!(lightboxDialog instanceof HTMLDialogElement)) throw new Error('missing lightbox');
 
+    const lightboxTitle = lightboxDialog.querySelector('[data-lightbox-title]') as HTMLElement;
+    const lightboxMeta = lightboxDialog.querySelector('[data-lightbox-meta]') as HTMLElement;
+    const lightboxSource = lightboxDialog.querySelector('[data-lightbox-source]') as HTMLSourceElement;
+    const lightboxImage = lightboxDialog.querySelector('[data-lightbox-image]') as HTMLImageElement;
+    const lightboxCounter = lightboxDialog.querySelector('[data-lightbox-counter]') as HTMLElement;
+    const prevBtn = lightboxDialog.querySelector('[data-lightbox-prev]') as HTMLButtonElement;
+    const nextBtn = lightboxDialog.querySelector('[data-lightbox-next]') as HTMLButtonElement;
+
+    // Build ordered list of visible artwork data
+    let items: { title: string; meta: string; webp: string; jpg: string; alt: string }[] = [];
+    let currentIndex = 0;
+
+    function buildItems() {
+      items = openers
+        .filter((btn) => {
+          const card = btn.closest('[data-card]');
+          return card && !card.hasAttribute('hidden');
+        })
+        .map((btn) => ({
+          title: btn.getAttribute('data-title') ?? '',
+          meta: btn.getAttribute('data-meta') ?? '',
+          webp: btn.getAttribute('data-webp') ?? '',
+          jpg: btn.getAttribute('data-jpg') ?? '',
+          alt: btn.getAttribute('data-alt') ?? '',
+        }));
+    }
+
+    function showItem(index: number) {
+      const item = items[index];
+      if (!item) return;
+      currentIndex = index;
+
+      lightboxTitle.textContent = item.title;
+      lightboxMeta.textContent = item.meta;
+      lightboxSource.setAttribute('srcset', item.webp);
+      lightboxImage.setAttribute('src', item.jpg);
+      lightboxImage.setAttribute('alt', item.alt);
+      lightboxCounter.textContent = `${index + 1} / ${items.length}`;
+
+      prevBtn.style.display = items.length > 1 ? '' : 'none';
+      nextBtn.style.display = items.length > 1 ? '' : 'none';
+    }
+
+    function navigate(delta: number) {
+      if (items.length <= 1) return;
+      const next = ((currentIndex + delta) % items.length + items.length) % items.length;
+      showItem(next);
+    }
+
+    // Category filtering
     filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
         const target = button.getAttribute('data-filter') ?? 'all';
-
-        filterButtons.forEach((candidate) => {
-          candidate.setAttribute('aria-pressed', String(candidate === button));
-        });
-
+        filterButtons.forEach((c) => c.setAttribute('aria-pressed', String(c === button)));
         cards.forEach((card) => {
-          const rawCategories = card.getAttribute('data-categories') ?? '';
-          const categoryList = rawCategories.split(',').filter(Boolean);
-          const shouldShow = target === 'all' || categoryList.includes(target);
-          card.toggleAttribute('hidden', !shouldShow);
+          const cats = (card.getAttribute('data-categories') ?? '').split(',').filter(Boolean);
+          card.toggleAttribute('hidden', target !== 'all' && !cats.includes(target));
         });
       });
     });
 
-    galleryRoot.querySelectorAll('[data-lightbox-open]').forEach((button) => {
+    // Open lightbox
+    openers.forEach((button) => {
       button.addEventListener('click', () => {
-        if (
-          !(lightboxDialog instanceof HTMLDialogElement) ||
-          !(lightboxTitle instanceof HTMLElement) ||
-          !(lightboxMeta instanceof HTMLElement) ||
-          !(lightboxSource instanceof HTMLSourceElement) ||
-          !(lightboxImage instanceof HTMLImageElement)
-        ) {
-          return;
-        }
-
-        const title = button.getAttribute('data-title') ?? '';
-        const meta = button.getAttribute('data-meta') ?? '';
-        const webp = button.getAttribute('data-webp') ?? '';
-        const jpg = button.getAttribute('data-jpg') ?? '';
-        const alt = button.getAttribute('data-alt') ?? '';
-
-        lightboxTitle.textContent = title;
-        lightboxMeta.textContent = meta;
-        lightboxSource.setAttribute('srcset', webp);
-        lightboxImage.setAttribute('src', jpg);
-        lightboxImage.setAttribute('alt', alt);
+        buildItems();
+        const card = button.closest('[data-card]');
+        const visibleOpeners = openers.filter((btn) => {
+          const c = btn.closest('[data-card]');
+          return c && !c.hasAttribute('hidden');
+        });
+        const idx = visibleOpeners.indexOf(button);
+        showItem(idx >= 0 ? idx : 0);
         lightboxDialog.showModal();
       });
     });
 
-    lightboxDialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => {
+    // Navigation buttons
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
+
+    // Keyboard navigation
+    lightboxDialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); navigate(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); navigate(1); }
+    });
+
+    // Close
+    lightboxDialog.querySelector('[data-lightbox-close]')?.addEventListener('click', () => {
       lightboxDialog.close();
     });
 
-    lightboxDialog?.addEventListener('click', (event) => {
-      if (event.target === lightboxDialog) {
-        lightboxDialog.close();
-      }
+    lightboxDialog.addEventListener('click', (event) => {
+      if (event.target === lightboxDialog) lightboxDialog.close();
     });
   }
 </script>
