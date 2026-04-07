@@ -1086,6 +1086,41 @@
     }
   },
   {
+    "id": "strolling-in-blue",
+    "title": "Strolling in Blue",
+    "slug": "strolling-in-blue",
+    "year": 2025,
+    "medium": "Watercolor and ink",
+    "dimensions": "24 x 36 in",
+    "description": "Streets in the city often get so packed that individual forms become moving masses, shapes in motion.",
+    "alt": "Watercolor of people walking down the street, composed of blue paintstrokes on white canvas",
+    "featured": false,
+    "categories": [
+      "portrait"
+    ],
+    "dominantColor": "#c8a030",
+    "width": 2904,
+    "height": 1751,
+    "images": {
+      "thumb": {
+        "webp": "/art/strolling-in-blue/thumb.webp",
+        "jpg": "/art/strolling-in-blue/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/strolling-in-blue/medium.webp",
+        "jpg": "/art/strolling-in-blue/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/strolling-in-blue/hero.webp",
+        "jpg": "/art/strolling-in-blue/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/strolling-in-blue/full.webp",
+        "jpg": "/art/strolling-in-blue/full.jpg"
+      }
+    }
+  },
+  {
     "id": "the-blue-umbrella",
     "title": "The Blue Umbrella",
     "slug": "the-blue-umbrella",
@@ -1223,41 +1258,6 @@
       "full": {
         "webp": "/art/traffic-silhouettes/full.webp",
         "jpg": "/art/traffic-silhouettes/full.jpg"
-      }
-    }
-  },
-  {
-    "id": "two-in-yellow",
-    "title": "Two in Yellow",
-    "slug": "two-in-yellow",
-    "year": 2025,
-    "medium": "Watercolor and ink",
-    "dimensions": "24 x 36 in",
-    "description": "Two figures in bright jackets — one yellow, one blue — walk side by side, rendered in quick gestural ink and wash.",
-    "alt": "Gestural watercolor sketch of two people in yellow and blue jackets",
-    "featured": false,
-    "categories": [
-      "portrait"
-    ],
-    "dominantColor": "#c8a030",
-    "width": 2904,
-    "height": 1751,
-    "images": {
-      "thumb": {
-        "webp": "/art/two-in-yellow/thumb.webp",
-        "jpg": "/art/two-in-yellow/thumb.jpg"
-      },
-      "medium": {
-        "webp": "/art/two-in-yellow/medium.webp",
-        "jpg": "/art/two-in-yellow/medium.jpg"
-      },
-      "hero": {
-        "webp": "/art/two-in-yellow/hero.webp",
-        "jpg": "/art/two-in-yellow/hero.jpg"
-      },
-      "full": {
-        "webp": "/art/two-in-yellow/full.webp",
-        "jpg": "/art/two-in-yellow/full.jpg"
       }
     }
   },
