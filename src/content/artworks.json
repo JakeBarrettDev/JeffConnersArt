@@ -1,5 +1,40 @@
 [
   {
+    "id": "5-29-a-m",
+    "title": "5:29 a.m.",
+    "slug": "5-29-a-m",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "that time of the morning where the mighty sun is filling the sky with its first hints of light and the city readies for another day. Just dark enough for the neon to glow, just light enough  to bring hope to another day…",
+    "alt": "Bold acrylic of dark blue city buildings against an intense red sky with the rising sun reflecting yellow on building windows",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#d82010",
+    "width": 2776,
+    "height": 2808,
+    "images": {
+      "thumb": {
+        "webp": "/art/5-29-a-m/thumb.webp",
+        "jpg": "/art/5-29-a-m/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/5-29-a-m/medium.webp",
+        "jpg": "/art/5-29-a-m/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/5-29-a-m/hero.webp",
+        "jpg": "/art/5-29-a-m/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/5-29-a-m/full.webp",
+        "jpg": "/art/5-29-a-m/full.jpg"
+      }
+    }
+  },
+  {
     "id": "autumn-falls",
     "title": "Autumn Falls",
     "slug": "autumn-falls",
@@ -101,76 +136,6 @@
       "full": {
         "webp": "/art/blue-crowd/full.webp",
         "jpg": "/art/blue-crowd/full.jpg"
-      }
-    }
-  },
-  {
-    "id": "blue-rain",
-    "title": "Blue Rain",
-    "slug": "blue-rain",
-    "year": 2025,
-    "medium": "Acrylic on canvas",
-    "dimensions": "24 x 36 in",
-    "description": "Orange and yellow umbrellas pop against a blue-drenched city intersection — figures, taxis, and rain all moving at once.",
-    "alt": "Acrylic painting of a rainy blue city street with bright orange umbrellas and yellow taxis",
-    "featured": true,
-    "categories": [
-      "urban"
-    ],
-    "dominantColor": "#3868b8",
-    "width": 2889,
-    "height": 2145,
-    "images": {
-      "thumb": {
-        "webp": "/art/blue-rain/thumb.webp",
-        "jpg": "/art/blue-rain/thumb.jpg"
-      },
-      "medium": {
-        "webp": "/art/blue-rain/medium.webp",
-        "jpg": "/art/blue-rain/medium.jpg"
-      },
-      "hero": {
-        "webp": "/art/blue-rain/hero.webp",
-        "jpg": "/art/blue-rain/hero.jpg"
-      },
-      "full": {
-        "webp": "/art/blue-rain/full.webp",
-        "jpg": "/art/blue-rain/full.jpg"
-      }
-    }
-  },
-  {
-    "id": "city-overlook",
-    "title": "City Overlook",
-    "slug": "city-overlook",
-    "year": 2025,
-    "medium": "Oil on canvas",
-    "dimensions": "24 x 36 in",
-    "description": "A rainy cityscape viewed from above — wet streets reflect signs and traffic as the skyline dissolves into mist and pink haze.",
-    "alt": "Oil painting of a rainy city intersection viewed from above with reflective wet streets and misty skyline",
-    "featured": true,
-    "categories": [
-      "urban"
-    ],
-    "dominantColor": "#906888",
-    "width": 1732,
-    "height": 1928,
-    "images": {
-      "thumb": {
-        "webp": "/art/city-overlook/thumb.webp",
-        "jpg": "/art/city-overlook/thumb.jpg"
-      },
-      "medium": {
-        "webp": "/art/city-overlook/medium.webp",
-        "jpg": "/art/city-overlook/medium.jpg"
-      },
-      "hero": {
-        "webp": "/art/city-overlook/hero.webp",
-        "jpg": "/art/city-overlook/hero.jpg"
-      },
-      "full": {
-        "webp": "/art/city-overlook/full.webp",
-        "jpg": "/art/city-overlook/full.jpg"
       }
     }
   },
@@ -455,41 +420,6 @@
     }
   },
   {
-    "id": "red-canyon",
-    "title": "Red Canyon",
-    "slug": "red-canyon",
-    "year": 2025,
-    "medium": "Acrylic on canvas",
-    "dimensions": "24 x 36 in",
-    "description": "Towers of blue and black rise against a blazing red sky — the city as geological formation, carved in paint.",
-    "alt": "Bold acrylic of dark blue city buildings against an intense red sky with yellow window lights",
-    "featured": true,
-    "categories": [
-      "urban"
-    ],
-    "dominantColor": "#d82010",
-    "width": 2776,
-    "height": 2808,
-    "images": {
-      "thumb": {
-        "webp": "/art/red-canyon/thumb.webp",
-        "jpg": "/art/red-canyon/thumb.jpg"
-      },
-      "medium": {
-        "webp": "/art/red-canyon/medium.webp",
-        "jpg": "/art/red-canyon/medium.jpg"
-      },
-      "hero": {
-        "webp": "/art/red-canyon/hero.webp",
-        "jpg": "/art/red-canyon/hero.jpg"
-      },
-      "full": {
-        "webp": "/art/red-canyon/full.webp",
-        "jpg": "/art/red-canyon/full.jpg"
-      }
-    }
-  },
-  {
     "id": "streetlamp-figure",
     "title": "Streetlamp Figure",
     "slug": "streetlamp-figure",
@@ -560,6 +490,41 @@
     }
   },
   {
+    "id": "the-calm-of-the-city",
+    "title": "The Calm of the City",
+    "slug": "the-calm-of-the-city",
+    "year": 2025,
+    "medium": "Acrylic on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "This is a piece I recently finished of downtown Kansas City during a recent cool rain storm we had. There is something about the rhythm of a city that captivates me, and how incredibly relaxing rain on a busy street can be. This is acrylic and oil on canvas 24” x 30",
+    "alt": "Acrylic painting of a rainy blue city street with bright orange umbrellas and yellow taxis",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#3868b8",
+    "width": 2889,
+    "height": 2145,
+    "images": {
+      "thumb": {
+        "webp": "/art/the-calm-of-the-city/thumb.webp",
+        "jpg": "/art/the-calm-of-the-city/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/the-calm-of-the-city/medium.webp",
+        "jpg": "/art/the-calm-of-the-city/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/the-calm-of-the-city/hero.webp",
+        "jpg": "/art/the-calm-of-the-city/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/the-calm-of-the-city/full.webp",
+        "jpg": "/art/the-calm-of-the-city/full.jpg"
+      }
+    }
+  },
+  {
     "id": "uptown-lights",
     "title": "Uptown Lights",
     "slug": "uptown-lights",
@@ -626,6 +591,41 @@
       "full": {
         "webp": "/art/venice-canal/full.webp",
         "jpg": "/art/venice-canal/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "view-from-scout-monument",
+    "title": "View from Scout Monument",
+    "slug": "view-from-scout-monument",
+    "year": 2025,
+    "medium": "Oil on canvas",
+    "dimensions": "24 x 36 in",
+    "description": "This is a  view of the KC area from the Scout monument.  If you ever come to Kansas City, it is a must see along with the nearby WW1 museum.",
+    "alt": "A view of the KC skyline from the Scout Monument in Jacob Loose Park.",
+    "featured": true,
+    "categories": [
+      "urban"
+    ],
+    "dominantColor": "#906888",
+    "width": 1732,
+    "height": 1928,
+    "images": {
+      "thumb": {
+        "webp": "/art/view-from-scout-monument/thumb.webp",
+        "jpg": "/art/view-from-scout-monument/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/view-from-scout-monument/medium.webp",
+        "jpg": "/art/view-from-scout-monument/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/view-from-scout-monument/hero.webp",
+        "jpg": "/art/view-from-scout-monument/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/view-from-scout-monument/full.webp",
+        "jpg": "/art/view-from-scout-monument/full.jpg"
       }
     }
   },
@@ -770,13 +770,13 @@
     }
   },
   {
-    "id": "city-rain-crossing",
-    "title": "City Rain Crossing",
-    "slug": "city-rain-crossing",
+    "id": "city-stroll-san-francisco",
+    "title": "City Stroll, San Francisco",
+    "slug": "city-stroll-san-francisco",
     "year": 2025,
     "medium": "Watercolor on paper",
     "dimensions": "24 x 36 in",
-    "description": "Silhouettes with umbrellas move through a rain-soaked intersection, buildings rising in warm amber and teal around them.",
+    "description": "Inspired by 'Inner City Blues (Make me Wanna Holler)' by Marvin Gaye.",
     "alt": "Watercolor of silhouetted figures with umbrellas crossing a rainy city street with teal and amber buildings",
     "featured": false,
     "categories": [
@@ -787,20 +787,20 @@
     "height": 2512,
     "images": {
       "thumb": {
-        "webp": "/art/city-rain-crossing/thumb.webp",
-        "jpg": "/art/city-rain-crossing/thumb.jpg"
+        "webp": "/art/city-stroll-san-francisco/thumb.webp",
+        "jpg": "/art/city-stroll-san-francisco/thumb.jpg"
       },
       "medium": {
-        "webp": "/art/city-rain-crossing/medium.webp",
-        "jpg": "/art/city-rain-crossing/medium.jpg"
+        "webp": "/art/city-stroll-san-francisco/medium.webp",
+        "jpg": "/art/city-stroll-san-francisco/medium.jpg"
       },
       "hero": {
-        "webp": "/art/city-rain-crossing/hero.webp",
-        "jpg": "/art/city-rain-crossing/hero.jpg"
+        "webp": "/art/city-stroll-san-francisco/hero.webp",
+        "jpg": "/art/city-stroll-san-francisco/hero.jpg"
       },
       "full": {
-        "webp": "/art/city-rain-crossing/full.webp",
-        "jpg": "/art/city-rain-crossing/full.jpg"
+        "webp": "/art/city-stroll-san-francisco/full.webp",
+        "jpg": "/art/city-stroll-san-francisco/full.jpg"
       }
     }
   },
@@ -1121,10 +1121,10 @@
     }
   },
   {
-    "id": "the-restaurant",
-    "title": "The Restaurant",
-    "slug": "the-restaurant",
-    "year": 2025,
+    "id": "the-hit-job",
+    "title": "The Hit Job",
+    "slug": "the-hit-job",
+    "year": 2026,
     "medium": "Acrylic on canvas",
     "dimensions": "24 x 36 in",
     "description": "A waiter carries a bottle through a warm amber dining room — the architecture receding into arches and golden light.",
@@ -1139,20 +1139,20 @@
     "height": 2583,
     "images": {
       "thumb": {
-        "webp": "/art/the-restaurant/thumb.webp",
-        "jpg": "/art/the-restaurant/thumb.jpg"
+        "webp": "/art/the-hit-job/thumb.webp",
+        "jpg": "/art/the-hit-job/thumb.jpg"
       },
       "medium": {
-        "webp": "/art/the-restaurant/medium.webp",
-        "jpg": "/art/the-restaurant/medium.jpg"
+        "webp": "/art/the-hit-job/medium.webp",
+        "jpg": "/art/the-hit-job/medium.jpg"
       },
       "hero": {
-        "webp": "/art/the-restaurant/hero.webp",
-        "jpg": "/art/the-restaurant/hero.jpg"
+        "webp": "/art/the-hit-job/hero.webp",
+        "jpg": "/art/the-hit-job/hero.jpg"
       },
       "full": {
-        "webp": "/art/the-restaurant/full.webp",
-        "jpg": "/art/the-restaurant/full.jpg"
+        "webp": "/art/the-hit-job/full.webp",
+        "jpg": "/art/the-hit-job/full.jpg"
       }
     }
   },
@@ -1198,8 +1198,8 @@
     "year": 2025,
     "medium": "Watercolor on paper",
     "dimensions": "24 x 36 in",
-    "description": "Cars and buildings rendered as dark ink shapes against glowing light — the city reduced to what the eye remembers at speed.",
-    "alt": "Atmospheric watercolor of dark car and building silhouettes against a glowing backlit city street",
+    "description": "We get these really warm mini storms in Kansas City all the time. This was rigfht after a brief downpour, with the sun breakking through late in the day.",
+    "alt": "Atmospheric watercolor of a post-storm sun breaking through cloud and reflecting against a glowing city street",
     "featured": false,
     "categories": [
       "urban"
