@@ -793,6 +793,46 @@ dialog.lightbox::backdrop {
   font-size: 0.85rem;
 }
 
+/* ---- about portrait ---- */
+
+.about-portrait {
+  display: flex;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.about-portrait__image {
+  flex: 0 0 40%;
+  max-width: 420px;
+}
+
+.about-portrait__image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+.about-portrait__text {
+  flex: 1;
+}
+
+.about-portrait__text p + p {
+  margin-top: 1rem;
+}
+
+@media (max-width: 720px) {
+  .about-portrait {
+    flex-direction: column !important;
+  }
+
+  .about-portrait__image {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 /* ---- contact ---- */
 
 .copy-row {

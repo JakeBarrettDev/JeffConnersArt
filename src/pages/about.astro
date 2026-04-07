@@ -15,6 +15,28 @@ import Layout from '../layouts/Layout.astro';
     </p>
   </section>
 
+  <section class="about-portrait flow-section reveal">
+    <div class="about-portrait__image">
+      <picture>
+        <source srcset="/jeff-painting.webp" type="image/webp" />
+        <img src="/jeff-painting.jpg" alt="Jeff Conners painting at his easel" loading="lazy" decoding="async" width="1000" height="800" />
+      </picture>
+    </div>
+    <div class="about-portrait__text">
+      <p class="section-label">The Artist</p>
+      <p>
+        Jeff is currently the Artist in Residence at Elevator in North Kansas City.
+        A self-taught artist, he works across watercolor, acrylics, and oils — specializing
+        in city and urban life, slices of daily moments that tell a brief story in a single frame.
+      </p>
+      <p>
+        Having recently moved from the San Francisco Bay Area to Kansas City, Jeff finds the
+        Westport, Crossroads, and West Bottoms neighborhoods to be fascinating, inviting places
+        to capture in his work.
+      </p>
+    </div>
+  </section>
+
   <section class="two-col flow-section reveal">
     <article class="panel">
       <p class="section-label">Process</p>
@@ -32,5 +54,25 @@ import Layout from '../layouts/Layout.astro';
         Colorblindness isn't a limitation here. It's the entire point of view.
       </p>
     </article>
+  </section>
+
+  <section class="about-portrait flow-section reveal" style="flex-direction:row-reverse;">
+    <div class="about-portrait__image">
+      <picture>
+        <source srcset="/jeff-portrait.webp" type="image/webp" />
+        <img src="/jeff-portrait.jpg" alt="Jeff Conners" loading="lazy" decoding="async" width="800" height="800" />
+      </picture>
+    </div>
+    <div class="about-portrait__text">
+      <p class="section-label">Beyond the Canvas</p>
+      <p>
+        Along with painting and visual arts, Jeff has a long background in the theatrical arts
+        as an actor and director, having recently directed <em>Bullshot Crummond</em> at
+        the Roaring 20 Gallery and Art in Kansas City.
+      </p>
+      <p>
+        <a class="cta" href="https://artskcgo.com/artist/jeff-conners" target="_blank" rel="noopener">View on ArtsKC</a>
+      </p>
+    </div>
   </section>
 </Layout>
