@@ -105,41 +105,6 @@
     }
   },
   {
-    "id": "blue-crowd",
-    "title": "Blue Crowd",
-    "slug": "blue-crowd",
-    "year": 2025,
-    "medium": "Watercolor on paper",
-    "dimensions": "24 x 36 in",
-    "description": "A procession of figures rendered entirely in shades of blue — individual forms dissolving into the collective.",
-    "alt": "Minimalist watercolor of a crowd of people silhouettes in various shades of blue on white",
-    "featured": true,
-    "categories": [
-      "portrait"
-    ],
-    "dominantColor": "#1848a0",
-    "width": 2867,
-    "height": 2703,
-    "images": {
-      "thumb": {
-        "webp": "/art/blue-crowd/thumb.webp",
-        "jpg": "/art/blue-crowd/thumb.jpg"
-      },
-      "medium": {
-        "webp": "/art/blue-crowd/medium.webp",
-        "jpg": "/art/blue-crowd/medium.jpg"
-      },
-      "hero": {
-        "webp": "/art/blue-crowd/hero.webp",
-        "jpg": "/art/blue-crowd/hero.jpg"
-      },
-      "full": {
-        "webp": "/art/blue-crowd/full.webp",
-        "jpg": "/art/blue-crowd/full.jpg"
-      }
-    }
-  },
-  {
     "id": "emerald-rain",
     "title": "Emerald Rain",
     "slug": "emerald-rain",
@@ -381,6 +346,41 @@
       "full": {
         "webp": "/art/night-walk/full.webp",
         "jpg": "/art/night-walk/full.jpg"
+      }
+    }
+  },
+  {
+    "id": "parkville-trail",
+    "title": "Parkville Trail",
+    "slug": "parkville-trail",
+    "year": 2025,
+    "medium": "Watercolor on paper",
+    "dimensions": "24 x 36 in",
+    "description": "A procession of figures rendered entirely in shades of blue — individual forms dissolving into the collective.",
+    "alt": "Minimalist watercolor of a crowd of people silhouettes in various shades of blue on white",
+    "featured": true,
+    "categories": [
+      "portrait"
+    ],
+    "dominantColor": "#1848a0",
+    "width": 2867,
+    "height": 2703,
+    "images": {
+      "thumb": {
+        "webp": "/art/parkville-trail/thumb.webp",
+        "jpg": "/art/parkville-trail/thumb.jpg"
+      },
+      "medium": {
+        "webp": "/art/parkville-trail/medium.webp",
+        "jpg": "/art/parkville-trail/medium.jpg"
+      },
+      "hero": {
+        "webp": "/art/parkville-trail/hero.webp",
+        "jpg": "/art/parkville-trail/hero.jpg"
+      },
+      "full": {
+        "webp": "/art/parkville-trail/full.webp",
+        "jpg": "/art/parkville-trail/full.jpg"
       }
     }
   },
