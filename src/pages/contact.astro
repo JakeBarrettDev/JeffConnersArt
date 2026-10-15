@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const contactEmail = 'jeff@example.com';
+import { contactEmail, facebookUrl, inquiryHref } from '../lib/site';
 ---
 
 <Layout title="Contact | Jeff Conners" description="Contact Jeff Conners for commissions and availability.">
@@ -19,28 +18,36 @@ const contactEmail = 'jeff@example.com';
     <div class="copy-row">
       <code id="contact-email">{contactEmail}</code>
       <button type="button" id="copy-email">Copy Email</button>
-      <a class="cta" href={`mailto:${contactEmail}?subject=Artwork Inquiry`}>Open Mail</a>
+      <a class="cta" href={inquiryHref('Artwork Inquiry')}>Open Mail</a>
     </div>
     <p id="copy-status" aria-live="polite" style="margin-top:0.9rem;color:var(--muted);"></p>
   </section>
 
+  <section class="panel flow-section reveal" aria-label="Social">
+    <p class="section-label">Facebook</p>
+    <p style="margin:0.4rem 0 1rem;color:var(--text-dim);">New paintings and studio updates are posted on Facebook.</p>
+    <a class="cta" href={facebookUrl} target="_blank" rel="noopener">Follow on Facebook</a>
+  </section>
+
   <script>
-    const copyButton = document.querySelector('#copy-email');
-    const emailEl = document.querySelector('#contact-email');
-    const statusEl = document.querySelector('#copy-status');
+    document.addEventListener('astro:page-load', () => {
+      const copyButton = document.querySelector('#copy-email');
+      const emailEl = document.querySelector('#contact-email');
+      const statusEl = document.querySelector('#copy-status');
 
-    copyButton?.addEventListener('click', async () => {
-      if (!(emailEl instanceof HTMLElement) || !(statusEl instanceof HTMLElement)) {
-        return;
-      }
+      copyButton?.addEventListener('click', async () => {
+        if (!(emailEl instanceof HTMLElement) || !(statusEl instanceof HTMLElement)) {
+          return;
+        }
 
-      const email = emailEl.textContent ?? '';
-      try {
-        await navigator.clipboard.writeText(email);
-        statusEl.textContent = 'Email copied.';
-      } catch {
-        statusEl.textContent = 'Clipboard access blocked. Copy manually from the email text.';
-      }
+        const email = emailEl.textContent ?? '';
+        try {
+          await navigator.clipboard.writeText(email);
+          statusEl.textContent = 'Email copied.';
+        } catch {
+          statusEl.textContent = 'Clipboard access blocked. Copy manually from the email text.';
+        }
+      });
     });
   </script>
 </Layout>

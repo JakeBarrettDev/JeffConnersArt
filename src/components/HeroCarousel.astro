@@ -10,7 +10,8 @@ const { artworks } = Astro.props;
 const slides = artworks.map((artwork, i) => ({
   id: artwork.id,
   title: artwork.title,
-  subtitle: `${artwork.medium}, ${artwork.year}`,
+  subtitle: [artwork.medium, artwork.year].filter(Boolean).join(', '),
+  href: `/work/${artwork.slug}`,
   alt: artwork.alt,
   webp: artwork.images.hero.webp,
   jpg: artwork.images.hero.jpg,
@@ -18,9 +19,9 @@ const slides = artworks.map((artwork, i) => ({
 }));
 
 const fallbackSlides = [
-  { id: 'tex-1', title: 'Studio Texture I', subtitle: '', alt: 'Canvas texture in cyan and charcoal tones', webp: '', jpg: '/textures/texture-1.svg', kb: 1 },
-  { id: 'tex-2', title: 'Studio Texture II', subtitle: '', alt: 'Abstract brush texture in cyan and orange', webp: '', jpg: '/textures/texture-2.svg', kb: 2 },
-  { id: 'tex-3', title: 'Studio Texture III', subtitle: '', alt: 'Layered paper texture in warm contrast tones', webp: '', jpg: '/textures/texture-3.svg', kb: 3 },
+  { id: 'tex-1', title: 'Studio Texture I', subtitle: '', href: '', alt: 'Canvas texture in cyan and charcoal tones', webp: '', jpg: '/textures/texture-1.svg', kb: 1 },
+  { id: 'tex-2', title: 'Studio Texture II', subtitle: '', href: '', alt: 'Abstract brush texture in cyan and orange', webp: '', jpg: '/textures/texture-2.svg', kb: 2 },
+  { id: 'tex-3', title: 'Studio Texture III', subtitle: '', href: '', alt: 'Layered paper texture in warm contrast tones', webp: '', jpg: '/textures/texture-3.svg', kb: 3 },
 ];
 
 const finalSlides = slides.length > 0 ? slides : fallbackSlides;
@@ -33,6 +34,9 @@ const finalSlides = slides.length > 0 ? slides : fallbackSlides;
         class:list={['hero-cinematic__slide', i === 0 && 'is-active']}
         data-slide-index={i}
         data-kb={slide.kb}
+        data-title={slide.title}
+        data-subtitle={slide.subtitle}
+        data-href={slide.href}
       >
         <picture>
           {slide.webp ? <source srcset={slide.webp} type="image/webp" /> : null}
@@ -53,6 +57,11 @@ const finalSlides = slides.length > 0 ? slides : fallbackSlides;
       <div class="hero-cinematic__meta" data-hero-meta>
         <p class="hero-cinematic__title" data-hero-title>{finalSlides[0]?.title ?? ''}</p>
         <p class="hero-cinematic__subtitle" data-hero-subtitle>{finalSlides[0]?.subtitle ?? ''}</p>
+        {finalSlides[0]?.href ? (
+          <a class="hero-cinematic__link" href={finalSlides[0].href} data-hero-link>
+            View this work <span aria-hidden="true">&rarr;</span>
+          </a>
+        ) : null}
       </div>
 
       {finalSlides.length > 1 && (
@@ -75,92 +84,122 @@ const finalSlides = slides.length > 0 ? slides : fallbackSlides;
   </div>
 </div>
 
-<script is:inline>
-(() => {
-  const root = document.querySelector('[data-hero-cinematic]');
-  if (!(root instanceof HTMLElement)) return;
+<script>
+  import { prefersReducedMotion } from '../scripts/motion';
 
-  const slides = Array.from(root.querySelectorAll('[data-slide-index]'));
-  const dots = Array.from(root.querySelectorAll('[data-dot-index]'));
-  const titleEl = root.querySelector('[data-hero-title]');
-  const subtitleEl = root.querySelector('[data-hero-subtitle]');
-  const metaEl = root.querySelector('[data-hero-meta]');
-
-  if (slides.length <= 1) return;
-
-  const titles = slides.map(s => s.getAttribute('data-title') || '');
-  const subtitles = slides.map(s => s.getAttribute('data-subtitle') || '');
-
-  let active = 0;
-  let paused = false;
   const INTERVAL = 6500;
   const FADE = 1400;
 
-  // Store metadata from the Astro-rendered data attributes
-  const slideMeta = [];
-  const metaOverlay = root.querySelector('.hero-cinematic__overlay');
+  function initHero() {
+    const root = document.querySelector<HTMLElement>('[data-hero-cinematic]');
+    if (!root) {
+      return;
+    }
 
-  // Read initial titles from the rendered slide elements - we'll pull from dots' aria-labels
-  dots.forEach((dot, i) => {
-    const label = dot.getAttribute('aria-label') || '';
-    const title = label.replace('View ', '');
-    slideMeta.push({ title });
-  });
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide-index]'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-dot-index]'));
+    const titleEl = root.querySelector('[data-hero-title]');
+    const subtitleEl = root.querySelector('[data-hero-subtitle]');
+    const linkEl = root.querySelector<HTMLAnchorElement>('[data-hero-link]');
+    const metaEl = root.querySelector<HTMLElement>('[data-hero-meta]');
 
-  function goTo(index) {
-    if (index === active) return;
-    const prev = active;
-    active = index;
+    if (slides.length <= 1) {
+      return;
+    }
 
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('is-active', i === active);
-      slide.classList.toggle('is-leaving', i === prev);
+    let active = 0;
+    let paused = false;
+    let timer: number | undefined;
+
+    const goTo = (index: number) => {
+      if (index === active) {
+        return;
+      }
+      const previous = active;
+      active = index;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === active);
+        slide.classList.toggle('is-leaving', i === previous);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === active);
+        dot.setAttribute('aria-selected', String(i === active));
+      });
+
+      metaEl?.classList.add('is-transitioning');
+      window.setTimeout(() => {
+        const slide = slides[active];
+        if (titleEl) titleEl.textContent = slide.dataset.title ?? '';
+        if (subtitleEl) subtitleEl.textContent = slide.dataset.subtitle ?? '';
+        if (linkEl && slide.dataset.href) linkEl.href = slide.dataset.href;
+        metaEl?.classList.remove('is-transitioning');
+      }, 400);
+
+      window.setTimeout(() => {
+        slides[previous]?.classList.remove('is-leaving');
+      }, FADE + 100);
+    };
+
+    const step = (direction: 1 | -1) => goTo((active + direction + slides.length) % slides.length);
+
+    const restart = () => {
+      window.clearInterval(timer);
+      if (!prefersReducedMotion()) {
+        timer = window.setInterval(() => {
+          if (!paused && !document.hidden) {
+            step(1);
+          }
+        }, INTERVAL);
+      }
+    };
+
+    root.addEventListener('mouseenter', () => {
+      paused = true;
+    });
+    root.addEventListener('mouseleave', () => {
+      paused = false;
     });
 
     dots.forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === active);
-      dot.setAttribute('aria-selected', String(i === active));
+      dot.addEventListener('click', () => {
+        goTo(i);
+        restart();
+      });
     });
 
-    // Fade meta text
-    if (metaEl instanceof HTMLElement) {
-      metaEl.classList.add('is-transitioning');
-      setTimeout(() => {
-        if (titleEl) titleEl.textContent = slideMeta[active]?.title || '';
-        // Rebuild subtitle from slide data
-        metaEl.classList.remove('is-transitioning');
-      }, 400);
-    }
+    // Swipe between slides on touch screens.
+    let touchStart: { x: number; y: number } | null = null;
+    root.addEventListener(
+      'touchstart',
+      (event) => {
+        const touch = event.touches[0];
+        touchStart = { x: touch.clientX, y: touch.clientY };
+      },
+      { passive: true }
+    );
+    root.addEventListener(
+      'touchend',
+      (event) => {
+        if (!touchStart) {
+          return;
+        }
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStart.x;
+        const deltaY = touch.clientY - touchStart.y;
+        touchStart = null;
+        if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+          step(deltaX < 0 ? 1 : -1);
+          restart();
+        }
+      },
+      { passive: true }
+    );
 
-    // Clean up leaving class after fade
-    setTimeout(() => {
-      slides[prev]?.classList.remove('is-leaving');
-    }, FADE + 100);
+    restart();
+    document.addEventListener('astro:before-swap', () => window.clearInterval(timer), { once: true });
   }
 
-  function advance() {
-    if (paused) return;
-    goTo((active + 1) % slides.length);
-  }
-
-  let timer = setInterval(advance, INTERVAL);
-
-  // Pause on hover (desktop)
-  root.addEventListener('mouseenter', () => { paused = true; });
-  root.addEventListener('mouseleave', () => { paused = false; });
-
-  // Dot clicks
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      clearInterval(timer);
-      goTo(i);
-      timer = setInterval(advance, INTERVAL);
-    });
-  });
-
-  // Respect reduced motion
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    clearInterval(timer);
-  }
-})();
+  document.addEventListener('astro:page-load', initHero);
 </script>

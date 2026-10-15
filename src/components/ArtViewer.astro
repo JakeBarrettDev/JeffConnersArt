@@ -1,0 +1,282 @@
+---
+import type { Artwork } from '../types/artwork';
+
+interface Props {
+  artwork: Artwork;
+}
+
+const { artwork } = Astro.props;
+const details = [artwork.medium, artwork.dimensions, artwork.year].filter(Boolean).join(' · ');
+---
+
+<dialog
+  class="viewer"
+  data-viewer
+  data-full-src={artwork.images.full.webp}
+  data-aspect={artwork.width && artwork.height ? artwork.width / artwork.height : 0.8}
+  aria-label={`${artwork.title}, full screen`}
+>
+  <div class="viewer__toolbar">
+    <div class="viewer__zoom" role="group" aria-label="Zoom">
+      <button type="button" data-zoom="out" aria-label="Zoom out">&minus;</button>
+      <button type="button" data-zoom="reset" aria-label="Fit to screen">Fit</button>
+      <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+    </div>
+    <button type="button" class="viewer__close" data-viewer-close>Close</button>
+  </div>
+
+  <div class="viewer__canvas" data-viewer-canvas>
+    <img src={artwork.images.hero.webp} alt={artwork.alt} draggable="false" data-viewer-image />
+  </div>
+
+  <div class="viewer__caption">
+    <strong>{artwork.title}</strong>
+    {details ? <span>{details}</span> : null}
+    <span class="viewer__hint">Pinch, scroll or double-tap to zoom</span>
+  </div>
+</dialog>
+
+<script>
+  import { ACTIVE_ART, prefersReducedMotion } from '../scripts/motion';
+
+  const MIN_SCALE = 1;
+  const MAX_SCALE = 6;
+
+  function initViewer() {
+    const dialog = document.querySelector<HTMLDialogElement>('[data-viewer]');
+    const canvas = dialog?.querySelector<HTMLElement>('[data-viewer-canvas]');
+    const image = dialog?.querySelector<HTMLImageElement>('[data-viewer-image]');
+    const pageImage = document.querySelector<HTMLElement>('[data-art-primary]');
+    if (!dialog || !canvas || !image) {
+      return;
+    }
+
+    const aspect = Number(dialog.dataset.aspect) || 0.8;
+    let base = { width: 0, height: 0 };
+    let scale = 1;
+    let x = 0;
+    let y = 0;
+
+    // Size the image box to the painting's exact proportions so the open/close morph
+    // lines up, then pan/zoom with a single transform.
+    const fit = () => {
+      const bounds = canvas.getBoundingClientRect();
+      const width = Math.min(bounds.width, bounds.height * aspect);
+      base = { width, height: width / aspect };
+      image.style.width = `${base.width}px`;
+      image.style.height = `${base.height}px`;
+      clamp();
+      render();
+    };
+
+    const clamp = () => {
+      const bounds = canvas.getBoundingClientRect();
+      const width = base.width * scale;
+      const height = base.height * scale;
+      x = width <= bounds.width ? (bounds.width - width) / 2 : Math.min(0, Math.max(bounds.width - width, x));
+      y = height <= bounds.height ? (bounds.height - height) / 2 : Math.min(0, Math.max(bounds.height - height, y));
+    };
+
+    const render = () => {
+      image.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      canvas.classList.toggle('is-zoomed', scale > 1.01);
+    };
+
+    const zoomAt = (nextScale: number, clientX: number, clientY: number) => {
+      const bounds = canvas.getBoundingClientRect();
+      const clamped = Math.min(MAX_SCALE, Math.max(MIN_SCALE, nextScale));
+      const pointX = clientX - bounds.left;
+      const pointY = clientY - bounds.top;
+      x = pointX - (pointX - x) * (clamped / scale);
+      y = pointY - (pointY - y) * (clamped / scale);
+      scale = clamped;
+      clamp();
+      render();
+    };
+
+    const zoomFromCenter = (factor: number) => {
+      const bounds = canvas.getBoundingClientRect();
+      image.classList.add('is-easing');
+      zoomAt(scale * factor, bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+    };
+
+    const reset = () => {
+      image.classList.add('is-easing');
+      scale = 1;
+      clamp();
+      render();
+    };
+
+    image.addEventListener('transitionend', () => image.classList.remove('is-easing'));
+
+    // Pointer handling: one pointer pans, two pointers pinch, a quick double tap toggles zoom.
+    const pointers = new Map<number, { x: number; y: number }>();
+    let pinchDistance = 0;
+    let lastTap = { time: 0, x: 0, y: 0 };
+    let moved = false;
+
+    const midpoint = () => {
+      const [a, b] = Array.from(pointers.values());
+      return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, distance: Math.hypot(a.x - b.x, a.y - b.y) };
+    };
+
+    canvas.addEventListener('pointerdown', (event) => {
+      canvas.setPointerCapture(event.pointerId);
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      image.classList.remove('is-easing');
+      moved = false;
+      if (pointers.size === 2) {
+        pinchDistance = midpoint().distance;
+      }
+    });
+
+    canvas.addEventListener('pointermove', (event) => {
+      const previous = pointers.get(event.pointerId);
+      if (!previous) {
+        return;
+      }
+
+      if (pointers.size === 2) {
+        const before = midpoint();
+        pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+        const after = midpoint();
+        x += after.x - before.x;
+        y += after.y - before.y;
+        zoomAt(scale * (after.distance / pinchDistance), after.x, after.y);
+        pinchDistance = after.distance;
+        moved = true;
+        return;
+      }
+
+      const deltaX = event.clientX - previous.x;
+      const deltaY = event.clientY - previous.y;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (Math.abs(deltaX) + Math.abs(deltaY) > 2) {
+        moved = true;
+      }
+      if (scale > 1) {
+        x += deltaX;
+        y += deltaY;
+        clamp();
+        render();
+      }
+    });
+
+    const endPointer = (event: PointerEvent) => {
+      pointers.delete(event.pointerId);
+      if (moved || pointers.size > 0 || event.type === 'pointercancel') {
+        return;
+      }
+
+      const now = performance.now();
+      const isDoubleTap =
+        now - lastTap.time < 320 && Math.hypot(event.clientX - lastTap.x, event.clientY - lastTap.y) < 30;
+      lastTap = { time: isDoubleTap ? 0 : now, x: event.clientX, y: event.clientY };
+      if (isDoubleTap) {
+        image.classList.add('is-easing');
+        if (scale > 1.01) {
+          reset();
+        } else {
+          zoomAt(2.5, event.clientX, event.clientY);
+        }
+      }
+    };
+
+    canvas.addEventListener('pointerup', endPointer);
+    canvas.addEventListener('pointercancel', endPointer);
+
+    canvas.addEventListener(
+      'wheel',
+      (event) => {
+        event.preventDefault();
+        image.classList.remove('is-easing');
+        zoomAt(scale * Math.exp(-event.deltaY * 0.0018), event.clientX, event.clientY);
+      },
+      { passive: false }
+    );
+
+    dialog.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const action = button.dataset.zoom;
+        if (action === 'in') zoomFromCenter(1.6);
+        if (action === 'out') zoomFromCenter(1 / 1.6);
+        if (action === 'reset') reset();
+      });
+    });
+
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === '+' || event.key === '=') zoomFromCenter(1.6);
+      if (event.key === '-') zoomFromCenter(1 / 1.6);
+      if (event.key === '0') reset();
+    });
+
+    // Swap in the full-resolution file once it has downloaded.
+    let fullLoaded = false;
+    const loadFull = () => {
+      const fullSrc = dialog.dataset.fullSrc;
+      if (fullLoaded || !fullSrc) {
+        return;
+      }
+      fullLoaded = true;
+      const loader = new Image();
+      loader.onload = () => {
+        image.src = fullSrc;
+      };
+      loader.src = fullSrc;
+    };
+
+    // Opening and closing morph the page's painting into the viewer and back.
+    const swapNames = (toViewer: boolean) => {
+      if (pageImage) {
+        pageImage.style.viewTransitionName = toViewer ? '' : ACTIVE_ART;
+      }
+      image.style.viewTransitionName = toViewer ? ACTIVE_ART : '';
+    };
+
+    const withTransition = (update: () => void) => {
+      if (prefersReducedMotion() || !document.startViewTransition) {
+        update();
+        return;
+      }
+      document.startViewTransition(update);
+    };
+
+    const open = () => {
+      loadFull();
+      withTransition(() => {
+        swapNames(true);
+        dialog.showModal();
+        scale = 1;
+        fit();
+      });
+    };
+
+    const close = () => {
+      withTransition(() => {
+        swapNames(false);
+        dialog.close();
+      });
+    };
+
+    document.querySelectorAll('[data-viewer-open]').forEach((trigger) => {
+      trigger.addEventListener('click', open);
+    });
+
+    dialog.querySelector('[data-viewer-close]')?.addEventListener('click', close);
+
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      close();
+    });
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (dialog.open) {
+        fit();
+      }
+    });
+    resizeObserver.observe(canvas);
+    document.addEventListener('astro:before-swap', () => resizeObserver.disconnect(), { once: true });
+  }
+
+  document.addEventListener('astro:page-load', initViewer);
+</script>

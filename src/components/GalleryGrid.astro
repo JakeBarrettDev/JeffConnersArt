@@ -42,34 +42,28 @@ const layoutPattern = ['art-card art-card--feature', 'art-card', 'art-card art-c
           <article
             class={layoutPattern[index % layoutPattern.length]}
             data-card
+            data-reveal
             data-categories={artwork.categories.join(',')}
-            style={`--stagger:${(index % 10) * 65}ms`}
+            style={artwork.dominantColor ? `--tint:${artwork.dominantColor}` : undefined}
           >
-            <button
-              type="button"
-              data-lightbox-open
-              data-title={artwork.title}
-              data-meta={`${artwork.medium} / ${artwork.year}`}
-              data-alt={artwork.alt}
-              data-webp={artwork.images.full.webp}
-              data-jpg={artwork.images.full.jpg}
-            >
+            <a href={`/work/${artwork.slug}`} class="art-card__link" data-art-link data-slug={artwork.slug}>
               <picture>
                 <source srcset={artwork.images.medium.webp} type="image/webp" />
                 <img
                   src={artwork.images.medium.jpg}
                   alt={artwork.alt}
-                  loading="lazy"
+                  loading={index < 4 ? 'eager' : 'lazy'}
                   decoding="async"
-                  width="1200"
-                  height="900"
+                  width={artwork.width ?? 1200}
+                  height={artwork.height ?? 900}
+                  data-art-image
                 />
               </picture>
               <div class="art-meta">
                 <h3>{artwork.title}</h3>
-                <p>{artwork.medium} / {artwork.year}</p>
+                <p>{[artwork.medium, artwork.year].filter(Boolean).join(' · ')}</p>
               </div>
-            </button>
+            </a>
           </article>
         ))
       )
@@ -77,86 +71,80 @@ const layoutPattern = ['art-card art-card--feature', 'art-card', 'art-card art-c
   </div>
 </section>
 
-<dialog class="lightbox" data-lightbox>
-  <button type="button" class="lightbox__close" data-lightbox-close>Close</button>
-  <figure class="lightbox__figure">
-    <picture>
-      <source data-lightbox-source type="image/webp" />
-      <img data-lightbox-image alt="" width="2000" height="1300" />
-    </picture>
-    <figcaption class="lightbox__caption">
-      <strong data-lightbox-title></strong>
-      <p data-lightbox-meta></p>
-    </figcaption>
-  </figure>
-</dialog>
-
 <script>
-  const galleryRoot = document.querySelector('[data-gallery-root]');
+  import { prefersReducedMotion } from '../scripts/motion';
 
-  if (galleryRoot instanceof HTMLElement) {
-    const filterButtons = Array.from(galleryRoot.querySelectorAll('[data-filter]'));
-    const cards = Array.from(galleryRoot.querySelectorAll('[data-card]'));
+  function initGallery() {
+    const galleryRoot = document.querySelector<HTMLElement>('[data-gallery-root]');
+    if (!galleryRoot) {
+      return;
+    }
 
-    const lightboxElement = document.querySelector('[data-lightbox]');
-    const lightboxDialog = lightboxElement instanceof HTMLDialogElement ? lightboxElement : null;
-    const lightboxTitle = lightboxDialog?.querySelector('[data-lightbox-title]');
-    const lightboxMeta = lightboxDialog?.querySelector('[data-lightbox-meta]');
-    const lightboxSource = lightboxDialog?.querySelector('[data-lightbox-source]');
-    const lightboxImage = lightboxDialog?.querySelector('[data-lightbox-image]');
+    const filterButtons = Array.from(galleryRoot.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+    const cards = Array.from(galleryRoot.querySelectorAll<HTMLElement>('[data-card]'));
+    if (filterButtons.length === 0) {
+      return;
+    }
+
+    const applyFilter = (target: string) => {
+      filterButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.filter === target));
+      });
+      cards.forEach((card) => {
+        const categoryList = (card.dataset.categories ?? '').split(',').filter(Boolean);
+        const shouldShow = target === 'all' || categoryList.includes(target);
+        card.toggleAttribute('hidden', !shouldShow);
+        if (shouldShow) {
+          card.classList.add('is-visible');
+        }
+      });
+    };
+
+    // Cards glide to their new spots instead of jumping.
+    const animateFilter = (target: string) => {
+      if (prefersReducedMotion() || !document.startViewTransition) {
+        applyFilter(target);
+        return;
+      }
+
+      cards.forEach((card, index) => {
+        card.style.viewTransitionName = `card-${index}`;
+        card.style.setProperty('view-transition-class', 'card');
+        const image = card.querySelector<HTMLElement>('[data-art-image]');
+        if (image) {
+          image.style.viewTransitionName = '';
+        }
+      });
+
+      const transition = document.startViewTransition(() => applyFilter(target));
+      transition.finished.finally(() => {
+        cards.forEach((card) => {
+          card.style.viewTransitionName = '';
+        });
+      });
+    };
 
     filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const target = button.getAttribute('data-filter') ?? 'all';
+        const target = button.dataset.filter ?? 'all';
+        animateFilter(target);
 
-        filterButtons.forEach((candidate) => {
-          candidate.setAttribute('aria-pressed', String(candidate === button));
-        });
-
-        cards.forEach((card) => {
-          const rawCategories = card.getAttribute('data-categories') ?? '';
-          const categoryList = rawCategories.split(',').filter(Boolean);
-          const shouldShow = target === 'all' || categoryList.includes(target);
-          card.toggleAttribute('hidden', !shouldShow);
-        });
-      });
-    });
-
-    galleryRoot.querySelectorAll('[data-lightbox-open]').forEach((button) => {
-      button.addEventListener('click', () => {
-        if (
-          !(lightboxDialog instanceof HTMLDialogElement) ||
-          !(lightboxTitle instanceof HTMLElement) ||
-          !(lightboxMeta instanceof HTMLElement) ||
-          !(lightboxSource instanceof HTMLSourceElement) ||
-          !(lightboxImage instanceof HTMLImageElement)
-        ) {
-          return;
+        // Keep the filter in the URL so "back" from an artwork returns to the same view.
+        const url = new URL(window.location.href);
+        if (target === 'all') {
+          url.searchParams.delete('category');
+        } else {
+          url.searchParams.set('category', target);
         }
-
-        const title = button.getAttribute('data-title') ?? '';
-        const meta = button.getAttribute('data-meta') ?? '';
-        const webp = button.getAttribute('data-webp') ?? '';
-        const jpg = button.getAttribute('data-jpg') ?? '';
-        const alt = button.getAttribute('data-alt') ?? '';
-
-        lightboxTitle.textContent = title;
-        lightboxMeta.textContent = meta;
-        lightboxSource.setAttribute('srcset', webp);
-        lightboxImage.setAttribute('src', jpg);
-        lightboxImage.setAttribute('alt', alt);
-        lightboxDialog.showModal();
+        history.replaceState(history.state, '', url);
       });
     });
 
-    lightboxDialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => {
-      lightboxDialog.close();
-    });
-
-    lightboxDialog?.addEventListener('click', (event) => {
-      if (event.target === lightboxDialog) {
-        lightboxDialog.close();
-      }
-    });
+    const initial = new URL(window.location.href).searchParams.get('category');
+    if (initial && filterButtons.some((button) => button.dataset.filter === initial)) {
+      applyFilter(initial);
+    }
   }
+
+  document.addEventListener('astro:page-load', initGallery);
 </script>

@@ -19,3 +19,16 @@ export function getAllCategories(): string[] {
   return Array.from(new Set(artworks.flatMap((artwork) => artwork.categories))).sort();
 }
 
+
+export function getArtworkNeighbors(slug: string): { previous: Artwork; next: Artwork } | null {
+  const ordered = getAllArtworks();
+  const index = ordered.findIndex((artwork) => artwork.slug === slug);
+  if (index < 0 || ordered.length < 2) {
+    return null;
+  }
+
+  return {
+    previous: ordered[(index - 1 + ordered.length) % ordered.length],
+    next: ordered[(index + 1) % ordered.length]
+  };
+}

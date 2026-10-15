@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+import { facebookUrl } from '../lib/site';
 import '../styles/global.css';
 
 interface Props {
@@ -30,15 +32,16 @@ const {
       rel="stylesheet"
     />
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body class:list={[snap && 'snap-enabled']}>
     <div class="page-shell">
-      <header class="site-header" data-site-header>
+      <header class="site-header" data-site-header transition:name="site-header" transition:animate="none">
         <a href="/" class="brand">Jeff Conners</a>
         <nav aria-label="Primary">
-          <a href="/gallery">Gallery</a>
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
+          <a href="/gallery" aria-current={Astro.url.pathname.startsWith('/gallery') || Astro.url.pathname.startsWith('/work') ? 'page' : undefined}>Gallery</a>
+          <a href="/about" aria-current={Astro.url.pathname.startsWith('/about') ? 'page' : undefined}>About</a>
+          <a href="/contact" aria-current={Astro.url.pathname.startsWith('/contact') ? 'page' : undefined}>Contact</a>
         </nav>
       </header>
       <main>
@@ -50,6 +53,7 @@ const {
             <a href="/gallery">Gallery</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
+            <a href={facebookUrl} target="_blank" rel="noopener">Facebook</a>
           </nav>
           <div class="footer-brand">
             <a href="https://MaroonRaccoon.dev" class="footer-logo" target="_blank" rel="noopener" aria-label="Maroon Raccoon LLC">
@@ -62,15 +66,7 @@ const {
     </div>
 
     <script>
-      const header = document.querySelector('[data-site-header]');
-      if (header instanceof HTMLElement) {
-        const toggleScrolled = () => {
-          header.classList.toggle('is-scrolled', window.scrollY > 24);
-        };
-
-        toggleScrolled();
-        window.addEventListener('scroll', toggleScrolled, { passive: true });
-      }
+      import '../scripts/motion';
     </script>
   </body>
 </html>

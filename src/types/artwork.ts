@@ -1,4 +1,5 @@
 export type ArtworkCategory =
+  | 'urban'
   | 'abstract'
   | 'landscape'
   | 'portrait'
@@ -30,6 +31,8 @@ export interface Artwork {
   description: string;
   categories: ArtworkCategory[];
   dominantColor?: string;
+  width: number | null;
+  height: number | null;
   images: ArtworkImages;
 }
 

@@ -1,6 +1,7 @@
 import { mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import heicConvert from 'heic-convert';
 import sharp from 'sharp';
 
 const projectRoot = process.cwd();
@@ -25,83 +26,88 @@ async function exists(targetPath) {
   }
 }
 
-function assertNonEmptyString(value, fieldName, fileName) {
-  if (typeof value !== 'string' || value.trim().length === 0) {
-    throw new Error(`${fileName}: field "${fieldName}" must be a non-empty string`);
-  }
+function warn(message) {
+  process.stderr.write(`art:build warning: ${message}\n`);
 }
 
-function normalizeSlug(slug, fileName) {
-  assertNonEmptyString(slug, 'slug', fileName);
-  const normalized = slug
+function slugify(value) {
+  return String(value)
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
-
-  if (!normalized) {
-    throw new Error(`${fileName}: slug resolves to an empty value`);
-  }
-
-  if (normalized !== slug) {
-    throw new Error(`${fileName}: slug must already be URL-safe (suggested: "${normalized}")`);
-  }
-
-  return normalized;
 }
 
+function optionalString(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+// Entries may be written by hand or by Pages CMS (see .pages.yml), so everything
+// except the title and photo has a sensible fallback instead of failing the deploy.
 function validateMetadata(raw, fileName) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
-    throw new Error(`${fileName}: metadata must be a JSON object`);
+    throw new Error('metadata must be a JSON object');
   }
 
-  assertNonEmptyString(raw.title, 'title', fileName);
-  const slug = normalizeSlug(raw.slug, fileName);
-  assertNonEmptyString(raw.medium, 'medium', fileName);
-  assertNonEmptyString(raw.dimensions, 'dimensions', fileName);
-  assertNonEmptyString(raw.description, 'description', fileName);
-  assertNonEmptyString(raw.alt, 'alt', fileName);
-  assertNonEmptyString(raw.sourceImage, 'sourceImage', fileName);
+  const title = optionalString(raw.title);
+  if (!title) {
+    throw new Error('field "title" is required');
+  }
 
-  const year = Number(raw.year);
+  const sourceImage = optionalString(raw.sourceImage);
+  if (!sourceImage) {
+    throw new Error('field "sourceImage" (the photo) is required');
+  }
+
+  const slug = slugify(optionalString(raw.slug) || path.basename(fileName, '.json') || title);
+  if (!slug) {
+    throw new Error('could not derive a URL slug from the file name or title');
+  }
+
+  let year = Number(raw.year);
   if (!Number.isInteger(year) || year < 1000 || year > 9999) {
-    throw new Error(`${fileName}: field "year" must be a 4-digit integer`);
+    year = new Date().getFullYear();
+    warn(`${fileName}: "year" missing or invalid, using ${year}`);
   }
 
-  if (typeof raw.featured !== 'boolean') {
-    throw new Error(`${fileName}: field "featured" must be true or false`);
+  const rawCategories = Array.isArray(raw.categories)
+    ? raw.categories
+    : typeof raw.categories === 'string'
+      ? [raw.categories]
+      : [];
+  const categories = Array.from(
+    new Set(rawCategories.map((category) => optionalString(category).toLowerCase()).filter(Boolean))
+  );
+  if (categories.length === 0) {
+    categories.push('other');
   }
 
-  if (!Array.isArray(raw.categories) || raw.categories.length === 0) {
-    throw new Error(`${fileName}: field "categories" must contain at least one category`);
-  }
-
-  const categories = raw.categories.map((category) => {
-    if (typeof category !== 'string' || category.trim().length === 0) {
-      throw new Error(`${fileName}: categories must be non-empty strings`);
-    }
-    return category.trim().toLowerCase();
-  });
-
-  const uniqueCategories = Array.from(new Set(categories));
-
-  if (raw.dominantColor !== undefined && typeof raw.dominantColor !== 'string') {
-    throw new Error(`${fileName}: optional field "dominantColor" must be a string`);
-  }
+  const medium = optionalString(raw.medium);
+  const dominantColor = optionalString(raw.dominantColor);
 
   return {
-    title: raw.title.trim(),
+    title,
     slug,
     year,
-    medium: raw.medium.trim(),
-    dimensions: raw.dimensions.trim(),
-    description: raw.description.trim(),
-    alt: raw.alt.trim(),
-    featured: raw.featured,
-    categories: uniqueCategories,
-    dominantColor: raw.dominantColor ? raw.dominantColor.trim() : undefined,
-    sourceImage: raw.sourceImage.trim()
+    medium,
+    dimensions: optionalString(raw.dimensions),
+    description: optionalString(raw.description),
+    alt: optionalString(raw.alt) || `${title}${medium ? `, ${medium.toLowerCase()}` : ''} by Jeff Conners`,
+    featured: raw.featured === true,
+    categories,
+    dominantColor: /^#[0-9a-f]{6}$/i.test(dominantColor) ? dominantColor : undefined,
+    sourceImage
   };
+}
+
+// Legacy entries store a bare file name under art/originals/<slug>/; Pages CMS
+// stores a repo-relative path such as art/originals/blue-rain.jpg.
+function resolveSourcePath(entry) {
+  const normalized = entry.sourceImage.replace(/^\/+/, '');
+  if (normalized.includes('/')) {
+    return path.join(projectRoot, normalized);
+  }
+  return path.join(originalsDir, entry.slug, normalized);
 }
 
 async function readMetadataEntries() {
@@ -112,41 +118,54 @@ async function readMetadataEntries() {
   const parsedEntries = [];
   for (const file of jsonFiles) {
     const filePath = path.join(metadataDir, file.name);
-    const rawText = await readFile(filePath, 'utf8');
 
-    let parsed;
     try {
-      parsed = JSON.parse(rawText);
-    } catch {
-      throw new Error(`${file.name}: invalid JSON`);
+      const parsed = JSON.parse(await readFile(filePath, 'utf8'));
+      const entry = validateMetadata(parsed, file.name);
+      if (!(await exists(resolveSourcePath(entry)))) {
+        throw new Error(`photo not found at ${path.relative(projectRoot, resolveSourcePath(entry))}`);
+      }
+      parsedEntries.push(entry);
+    } catch (error) {
+      warn(`skipping ${file.name}: ${error instanceof SyntaxError ? 'invalid JSON' : error.message}`);
     }
-
-    parsedEntries.push(validateMetadata(parsed, file.name));
   }
 
   return parsedEntries;
 }
 
-async function ensureSourceImages(metadataEntries) {
-  for (const entry of metadataEntries) {
-    const sourcePath = path.join(originalsDir, entry.slug, entry.sourceImage);
-    if (!(await exists(sourcePath))) {
-      throw new Error(
-        `${entry.slug}: missing source image at art/originals/${entry.slug}/${entry.sourceImage}`
-      );
-    }
+// sharp's prebuilt binaries cannot decode HEIC, so iPhone photos are converted first.
+async function loadSourceInput(sourcePath) {
+  if (!/\.(heic|heif)$/i.test(sourcePath)) {
+    return sourcePath;
   }
+
+  const converted = await heicConvert({
+    buffer: await readFile(sourcePath),
+    format: 'JPEG',
+    quality: 0.95
+  });
+  return Buffer.from(converted);
+}
+
+// Average color, saturated a little so it reads as a tint rather than mud.
+async function averageColor(input) {
+  const pixel = await sharp(input, { limitInputPixels: false })
+    .resize(1, 1, { fit: 'fill' })
+    .modulate({ saturation: 1.5 })
+    .removeAlpha()
+    .raw()
+    .toBuffer();
+  return `#${Array.from(pixel.subarray(0, 3), (channel) => channel.toString(16).padStart(2, '0')).join('')}`;
 }
 
 async function buildArtwork(entry) {
-  const sourcePath = path.join(originalsDir, entry.slug, entry.sourceImage);
+  const input = await loadSourceInput(resolveSourcePath(entry));
   const outputDir = path.join(generatedArtDir, entry.slug);
   await mkdir(outputDir, { recursive: true });
 
-  const sourceSharp = sharp(sourcePath, { limitInputPixels: false }).rotate();
-  const sourceMeta = await sourceSharp.metadata();
-
   const generatedImages = {};
+  let fullSize = { width: null, height: null };
 
   for (const [variantName, settings] of Object.entries(variants)) {
     const webpOutput = path.join(outputDir, `${variantName}.webp`);
@@ -159,24 +178,30 @@ async function buildArtwork(entry) {
       withoutEnlargement: true
     };
 
-    await Promise.all([
-      sharp(sourcePath, { limitInputPixels: false })
+    const [webpInfo] = await Promise.all([
+      sharp(input, { limitInputPixels: false })
         .rotate()
         .resize(resizeConfig)
         .webp({ quality: settings.quality })
         .toFile(webpOutput),
-      sharp(sourcePath, { limitInputPixels: false })
+      sharp(input, { limitInputPixels: false })
         .rotate()
         .resize(resizeConfig)
         .jpeg({ quality: Math.max(66, settings.quality - 6), mozjpeg: true })
         .toFile(jpgOutput)
     ]);
 
+    if (variantName === 'full') {
+      fullSize = { width: webpInfo.width, height: webpInfo.height };
+    }
+
     generatedImages[variantName] = {
       webp: `/art/${entry.slug}/${variantName}.webp`,
       jpg: `/art/${entry.slug}/${variantName}.jpg`
     };
   }
+
+  const dominantColor = entry.dominantColor ?? (await averageColor(input));
 
   return {
     id: entry.slug,
@@ -189,9 +214,9 @@ async function buildArtwork(entry) {
     alt: entry.alt,
     featured: entry.featured,
     categories: entry.categories,
-    dominantColor: entry.dominantColor,
-    width: sourceMeta.width ?? null,
-    height: sourceMeta.height ?? null,
+    dominantColor,
+    width: fullSize.width,
+    height: fullSize.height,
     images: generatedImages
   };
 }
@@ -203,23 +228,26 @@ async function main() {
   const metadataEntries = await readMetadataEntries();
 
   const slugSet = new Set();
-  for (const entry of metadataEntries) {
+  const uniqueEntries = metadataEntries.filter((entry) => {
     if (slugSet.has(entry.slug)) {
-      throw new Error(`Duplicate slug detected: "${entry.slug}"`);
+      warn(`skipping duplicate slug "${entry.slug}"`);
+      return false;
     }
     slugSet.add(entry.slug);
-  }
-
-  await ensureSourceImages(metadataEntries);
+    return true;
+  });
 
   await rm(generatedArtDir, { recursive: true, force: true });
   await mkdir(generatedArtDir, { recursive: true });
 
   const compiled = [];
 
-  for (const entry of metadataEntries) {
-    const built = await buildArtwork(entry);
-    compiled.push(built);
+  for (const entry of uniqueEntries) {
+    try {
+      compiled.push(await buildArtwork(entry));
+    } catch (error) {
+      warn(`skipping ${entry.slug}: could not process photo (${error.message})`);
+    }
   }
 
   compiled.sort((a, b) => Number(b.featured) - Number(a.featured) || a.title.localeCompare(b.title));

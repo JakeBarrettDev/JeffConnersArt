@@ -1,0 +1,74 @@
+# Pages CMS (https://pagescms.org) — lets Jeff add and edit paintings from a browser or phone.
+# Saving commits to main, which triggers the normal build + deploy (.github/workflows/deploy.yml).
+# scripts/art-build.mjs derives the URL slug from the file name, converts HEIC photos,
+# and fills in alt text and the accent color when they are left blank.
+
+media:
+  input: art/originals
+  output: art/originals
+  extensions: [jpg, jpeg, png, webp, heic, heif]
+  rename: safe
+
+content:
+  - name: artworks
+    label: Paintings
+    type: collection
+    path: art/metadata
+    format: json
+    filename: "{fields.title}.json"
+    view:
+      primary: title
+      fields: [title, year, featured]
+      sort: [title, year]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: sourceImage
+        label: Photo of the painting
+        description: A straight-on photo, cropped to the edges of the canvas. iPhone photos are fine.
+        type: image
+        required: true
+      - name: year
+        label: Year painted
+        type: number
+        required: true
+      - name: medium
+        label: Medium
+        type: select
+        options:
+          values:
+            - Acrylic on canvas
+            - Oil on canvas
+            - Watercolor on paper
+            - Watercolor and ink
+            - Mixed media on paper
+            - Pastel on paper
+      - name: dimensions
+        label: Size
+        description: For example "24 x 36 in". Leave blank if unsure.
+        type: string
+      - name: categories
+        label: Category
+        type: select
+        required: true
+        options:
+          multiple: true
+          values:
+            - urban
+            - landscape
+            - portrait
+            - abstract
+            - other
+      - name: featured
+        label: Show on the home page
+        type: boolean
+      - name: description
+        label: About this piece
+        description: A sentence or two shown next to the painting. Optional.
+        type: text
+      - name: alt
+        label: Image description for screen readers
+        description: Optional. Describe what the painting shows; a default is used if blank.
+        type: text

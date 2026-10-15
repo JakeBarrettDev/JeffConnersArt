@@ -1,0 +1,163 @@
+---
+import ArtViewer from '../../components/ArtViewer.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getAllArtworks, getArtworkNeighbors } from '../../lib/artworks';
+import { inquiryHref } from '../../lib/site';
+import type { Artwork } from '../../types/artwork';
+
+export function getStaticPaths() {
+  return getAllArtworks().map((artwork) => ({ params: { slug: artwork.slug }, props: { artwork } }));
+}
+
+interface Props {
+  artwork: Artwork;
+}
+
+const { artwork } = Astro.props;
+const neighbors = getArtworkNeighbors(artwork.slug);
+const facts = [
+  { label: 'Year', value: artwork.year },
+  { label: 'Medium', value: artwork.medium },
+  { label: 'Size', value: artwork.dimensions }
+].filter((fact) => fact.value);
+---
+
+<Layout title={`${artwork.title} | Jeff Conners`} description={artwork.description || artwork.alt}>
+  <article
+    class="work flow-section--first"
+    data-work-slug={artwork.slug}
+    style={artwork.dominantColor ? `--tint:${artwork.dominantColor}` : undefined}
+  >
+    <div class="work__stage" data-work-stage>
+      <button type="button" class="work__art" data-viewer-open aria-label={`View ${artwork.title} full screen`}>
+        <picture>
+          <source
+            srcset={`${artwork.images.medium.webp} 1280w, ${artwork.images.hero.webp} 2200w`}
+            sizes="(max-width: 900px) 92vw, 60vw"
+            type="image/webp"
+          />
+          <img
+            src={artwork.images.hero.jpg}
+            alt={artwork.alt}
+            width={artwork.width ?? 1600}
+            height={artwork.height ?? 2000}
+            fetchpriority="high"
+            data-art-image
+            data-art-primary
+            style="view-transition-name: active-art"
+          />
+        </picture>
+      </button>
+    </div>
+
+    <div class="work__info">
+      <p class="section-label work__enter">{artwork.categories.join(' · ')}</p>
+      <h1 class="work__enter">{artwork.title}</h1>
+
+      {
+        facts.length > 0 ? (
+          <dl class="work__facts work__enter">
+            {facts.map((fact) => (
+              <div>
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null
+      }
+
+      {artwork.description ? <p class="work__description work__enter">{artwork.description}</p> : null}
+
+      <div class="work__actions work__enter">
+        <button type="button" class="cta" data-viewer-open>View full screen</button>
+        <a class="cta cta--quiet" href={inquiryHref(`About "${artwork.title}"`)}>Ask about this piece</a>
+      </div>
+
+      {
+        neighbors ? (
+          <nav class="work__pager work__enter" aria-label="More artwork">
+            <a href={`/work/${neighbors.previous.slug}`} rel="prev" data-work-nav="prev">
+              <img src={neighbors.previous.images.thumb.webp} alt="" width="56" height="56" loading="lazy" />
+              <span>
+                <small>Previous</small>
+                {neighbors.previous.title}
+              </span>
+            </a>
+            <a href={`/work/${neighbors.next.slug}`} rel="next" data-work-nav="next">
+              <span>
+                <small>Next</small>
+                {neighbors.next.title}
+              </span>
+              <img src={neighbors.next.images.thumb.webp} alt="" width="56" height="56" loading="lazy" />
+            </a>
+          </nav>
+        ) : null
+      }
+
+      <a class="work__back work__enter" href="/gallery">&larr; All work</a>
+    </div>
+  </article>
+
+  <ArtViewer artwork={artwork} />
+</Layout>
+
+<script>
+  import { navigate } from 'astro:transitions/client';
+
+  function initWorkNavigation() {
+    const stage = document.querySelector<HTMLElement>('[data-work-stage]');
+    const previous = document.querySelector<HTMLAnchorElement>('[data-work-nav="prev"]');
+    const next = document.querySelector<HTMLAnchorElement>('[data-work-nav="next"]');
+    if (!stage || !previous || !next) {
+      return;
+    }
+
+    const controller = new AbortController();
+    const { signal } = controller;
+    document.addEventListener('astro:before-swap', () => controller.abort(), { once: true });
+
+    // Arrow keys step through the collection while the fullscreen viewer is closed.
+    document.addEventListener(
+      'keydown',
+      (event) => {
+        const viewerOpen = document.querySelector<HTMLDialogElement>('[data-viewer]')?.open;
+        if (viewerOpen || event.altKey || event.metaKey || event.ctrlKey) {
+          return;
+        }
+        if (event.key === 'ArrowLeft') navigate(previous.href);
+        if (event.key === 'ArrowRight') navigate(next.href);
+      },
+      { signal }
+    );
+
+    // Horizontal swipe on the painting moves to the neighbouring piece.
+    let start: { x: number; y: number } | null = null;
+    stage.addEventListener(
+      'touchstart',
+      (event) => {
+        const touch = event.touches[0];
+        start = event.touches.length === 1 ? { x: touch.clientX, y: touch.clientY } : null;
+      },
+      { passive: true, signal }
+    );
+    stage.addEventListener(
+      'touchend',
+      (event) => {
+        if (!start) {
+          return;
+        }
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - start.x;
+        const deltaY = touch.clientY - start.y;
+        start = null;
+        if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+          navigate(deltaX < 0 ? next.href : previous.href);
+        }
+      },
+      { passive: true, signal }
+    );
+  }
+
+  document.addEventListener('astro:page-load', initWorkNavigation);
+</script>
