@@ -10,7 +10,8 @@ interface Props {
 
 const { artworks, title = 'Selected Works', showFilters = true, description } = Astro.props;
 const categories = Array.from(new Set(artworks.flatMap((artwork) => artwork.categories))).sort();
-const layoutPattern = ['art-card art-card--feature', 'art-card', 'art-card art-card--tall', 'art-card art-card--wide', 'art-card', 'art-card art-card--tall'];
+const aspectRatio = (artwork: Artwork) =>
+  artwork.width && artwork.height ? (artwork.width / artwork.height).toFixed(4) : '0.8';
 ---
 
 <section class="gallery-shell" data-gallery-root>
@@ -40,11 +41,11 @@ const layoutPattern = ['art-card art-card--feature', 'art-card', 'art-card art-c
       ) : (
         artworks.map((artwork, index) => (
           <article
-            class={layoutPattern[index % layoutPattern.length]}
+            class="art-card"
             data-card
             data-reveal
             data-categories={artwork.categories.join(',')}
-            style={artwork.dominantColor ? `--tint:${artwork.dominantColor}` : undefined}
+            style={`--ar:${aspectRatio(artwork)};${artwork.dominantColor ? `--tint:${artwork.dominantColor}` : ''}`}
           >
             <a href={`/work/${artwork.slug}`} class="art-card__link" data-art-link data-slug={artwork.slug}>
               <picture>
