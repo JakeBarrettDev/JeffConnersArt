@@ -1,16 +1,14 @@
 {
-  "title": "Equestrian Skyline",
-  "slug": "equestrian-skyline",
+  "title": "Rainy Matinee",
+  "sourceImage": "main.jpg",
   "year": 2025,
   "medium": "Watercolor on paper",
-  "dimensions": "24 x 36 in",
-  "description": "A statue on horseback presides over a hazy skyline under a wash of peach and coral sky.",
-  "alt": "Watercolor of equestrian statue silhouette against a peach and coral urban skyline at sunset",
-  "featured": false,
+  "dimensions": "16 x 16 in",
   "categories": [
     "urban",
     "landscape"
   ],
-  "dominantColor": "#d8906a",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "A warm rain gently falls in the city as a couple strolls towards the theatre matinee",
+  "alt": "Watercolor of city near a theatre in oranges, teal and yellow"
 }
