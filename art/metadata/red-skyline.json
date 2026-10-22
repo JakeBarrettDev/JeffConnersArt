@@ -1,15 +1,13 @@
 {
-  "title": "Red Skyline",
-  "slug": "red-skyline",
+  "title": "Morty's Place",
+  "sourceImage": "main.jpg",
   "year": 2025,
-  "medium": "Acrylic on canvas",
-  "dimensions": "24 x 36 in",
-  "description": "Blue towers against a red sky — the city simplified to its boldest possible contrast, all structure and fire.",
-  "alt": "Bold acrylic painting of blue skyscrapers against a vivid red sky",
-  "featured": false,
+  "medium": "Oil on canvas",
+  "dimensions": "48 x 48 in",
   "categories": [
     "urban"
   ],
-  "dominantColor": "#1838b0",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "Distant skyscrapers give way to a busy intersection in the rain, near Morty's place, where jazz is played nightly, and people know your name.....",
+  "alt": "atmospheric cityscape and neighborhood action around Morty's place jazz club"
 }
