@@ -1,15 +1,13 @@
 {
   "title": "Autumn Trail",
-  "slug": "autumn-trail",
+  "sourceImage": "main.jpg",
   "year": 2025,
   "medium": "Watercolor on paper",
-  "dimensions": "24 x 36 in",
-  "description": "A path curves into a wall of autumn foliage — copper, rust, and hints of cyan between the trees.",
-  "alt": "Watercolor landscape of a trail leading into autumn trees in warm rust and copper tones",
-  "featured": false,
+  "dimensions": "8 x 10 in",
   "categories": [
     "landscape"
   ],
-  "dominantColor": "#a85830",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "A path curves into a wall of autumn foliage — copper, rust, and hints of cyan between the trees.",
+  "alt": "Watercolor landscape of a trail leading into autumn trees in warm rust and copper tones"
 }
