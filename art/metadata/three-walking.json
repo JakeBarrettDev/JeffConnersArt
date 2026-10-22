@@ -1,15 +1,13 @@
 {
-  "title": "Three Walking",
-  "slug": "three-walking",
+  "title": "Soccer Dads",
+  "sourceImage": "main.jpg",
   "year": 2025,
   "medium": "Watercolor on paper",
-  "dimensions": "24 x 36 in",
-  "description": "Three figures seen from behind, walking together in loose watercolor — the shapes of connection drawn without detail.",
-  "alt": "Watercolor painting of three people walking away from viewer in muted earth tones",
-  "featured": false,
+  "dimensions": "8 x 10 in",
   "categories": [
     "portrait"
   ],
-  "dominantColor": "#a89070",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "Soccer dads hovering together in loose watercolor — the shapes of connection drawn without detail.",
+  "alt": "Watercolor painting of three people walking away from viewer in muted earth tones"
 }
