@@ -1,15 +1,12 @@
 {
   "title": "City Grid",
-  "slug": "city-grid",
+  "sourceImage": "main.jpg",
   "year": 2025,
-  "medium": "Watercolor and ink",
-  "dimensions": "24 x 36 in",
-  "description": "An aerial view of the city in rain and mist, the grid of streets catching light where water pools between buildings.",
-  "alt": "Atmospheric watercolor aerial view of a misty city grid with rain and reflected light",
-  "featured": false,
+  "medium": "Oil on canvas",
+  "dimensions": "16 x 20 in",
   "categories": [
     "urban"
   ],
-  "dominantColor": "#606870",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "Midtown hustle bustle of daily life in the city that never sleeps."
 }
