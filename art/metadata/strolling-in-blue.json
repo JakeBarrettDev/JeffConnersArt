@@ -1,15 +1,14 @@
 {
   "title": "Strolling in Blue",
-  "slug": "strolling-in-blue",
+  "sourceImage": "main.jpg",
   "year": 2025,
   "medium": "Watercolor and ink",
-  "dimensions": "24 x 36 in",
-  "description": "Streets in the city often get so packed that individual forms become moving masses, shapes in motion.",
-  "alt": "Watercolor of people walking down the street, composed of blue paintstrokes on white canvas",
-  "featured": false,
+  "dimensions": "16 x 12",
   "categories": [
-    "portrait"
+    "portrait",
+    "urban"
   ],
-  "dominantColor": "#c8a030",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "Streets in the city often get so packed that individual forms become moving masses, shapes in motion.",
+  "alt": "Watercolor of people walking down the street, composed of blue paintstrokes on white canvas"
 }
