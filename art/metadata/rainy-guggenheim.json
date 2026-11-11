@@ -1,15 +1,13 @@
 {
-  "title": "Rainy Guggenheim",
-  "slug": "rainy-guggenheim",
+  "title": "4:57 a.m.",
+  "sourceImage": "main.jpg",
   "year": 2025,
-  "medium": "Watercolor and ink",
-  "dimensions": "24 x 36 in",
-  "description": "The Guggenheim emerges from rain and atmosphere, a blue umbrella the only saturated note in a field of grey wash.",
-  "alt": "Watercolor of the Guggenheim museum in rain with blue umbrella figure and grey atmospheric wash",
-  "featured": false,
+  "medium": "Acrylic on canvas",
+  "dimensions": "12 x 12\"",
   "categories": [
     "urban"
   ],
-  "dominantColor": "#4050a0",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "The city just before sunrise, a few cars heading home from a long night, electric blue of the cold steel shows it's final light of the evening....",
+  "alt": "cityscape of red, electric blue and yellow just before sunrise as a few cars find their way home"
 }
