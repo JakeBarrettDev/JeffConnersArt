@@ -1,15 +1,13 @@
 {
   "title": "Violet Hour",
-  "slug": "violet-hour",
+  "sourceImage": "main.jpg",
   "year": 2025,
   "medium": "Acrylic on canvas",
-  "dimensions": "24 x 36 in",
-  "description": "Figures move through a city intersection lit in violet, orange, and blue — the city vibrating in color that only exists in the gap between day and night.",
-  "alt": "Vibrant acrylic painting of city figures in a purple and orange lit urban night scene with neon reflections",
-  "featured": true,
+  "dimensions": "11 x 14 in",
   "categories": [
     "urban"
   ],
-  "dominantColor": "#6030a0",
-  "sourceImage": "main.jpg"
+  "featured": true,
+  "description": "Figures move through a city intersection lit in violet, orange, and blue — the city vibrating in color that only exists in the gap between day and night.",
+  "alt": "Vibrant acrylic painting of city figures in a purple and orange lit urban night scene with neon reflections"
 }
