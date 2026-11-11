@@ -1,15 +1,13 @@
 {
-  "title": "Wet Night Crossing",
-  "slug": "wet-night-crossing",
+  "title": "The Daily Grind...",
+  "sourceImage": "main.jpg",
   "year": 2025,
   "medium": "Acrylic on canvas",
-  "dimensions": "24 x 36 in",
-  "description": "Umbrella-carrying silhouettes cross in front of a yellow taxi as rain turns the city into streaks of orange, blue, and black.",
-  "alt": "Dramatic acrylic night scene of silhouettes with umbrellas near a taxi on rain-streaked dark city streets",
-  "featured": false,
+  "dimensions": "16 x 20 in",
   "categories": [
     "urban"
   ],
-  "dominantColor": "#c07020",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "Umbrella-carrying silhouettes cross in front of a yellow taxi as rain turns the city into streaks of orange, blue, and black.",
+  "alt": "Dramatic acrylic night scene of silhouettes with umbrellas near a taxi on rain-streaked dark city streets"
 }
