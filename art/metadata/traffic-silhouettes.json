@@ -1,15 +1,13 @@
 {
-  "title": "Traffic Silhouettes",
-  "slug": "traffic-silhouettes",
+  "title": "a Warm Kansas City Rain....",
+  "sourceImage": "main.jpg",
   "year": 2025,
   "medium": "Watercolor on paper",
-  "dimensions": "24 x 36 in",
-  "description": "We get these really warm mini storms in Kansas City all the time. This was rigfht after a brief downpour, with the sun breakking through late in the day.",
-  "alt": "Atmospheric watercolor of a post-storm sun breaking through cloud and reflecting against a glowing city street",
-  "featured": false,
+  "dimensions": "9 x 12 in",
   "categories": [
     "urban"
   ],
-  "dominantColor": "#b87840",
-  "sourceImage": "main.jpg"
+  "featured": false,
+  "description": "We get these really warm mini storms in Kansas City all the time. This was rigfht after a brief downpour, with the sun breakking through late in the day.",
+  "alt": "Atmospheric watercolor of a post-storm sun breaking through cloud and reflecting against a glowing city street"
 }
