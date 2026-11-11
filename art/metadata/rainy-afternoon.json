@@ -1,15 +1,13 @@
 {
   "title": "Rainy Afternoon",
-  "slug": "rainy-afternoon",
+  "sourceImage": "main.jpg",
   "year": 2025,
   "medium": "Acrylic on canvas",
-  "dimensions": "24 x 36 in",
-  "description": "Yellow cabs and colored umbrellas move through a blue rain — a busy intersection rendered with joyful urgency.",
-  "alt": "Acrylic painting of a rainy city afternoon with yellow taxis, colorful umbrellas, and neon storefronts",
-  "featured": true,
+  "dimensions": "18 x 24 in",
   "categories": [
     "urban"
   ],
-  "dominantColor": "#d89020",
-  "sourceImage": "main.jpg"
+  "featured": true,
+  "description": "Yellow cabs and colored umbrellas move through a blue rain — a busy intersection rendered with joyful urgency.",
+  "alt": "Acrylic painting of a rainy city afternoon with yellow taxis, colorful umbrellas, and neon storefronts"
 }
